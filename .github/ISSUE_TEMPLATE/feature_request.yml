@@ -1,0 +1,64 @@
+name: Feature request
+description: Propose a new sample or an improvement to an existing sample
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggest features that improve learning value, prototype quality, or portfolio presentation.
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: Request type
+      options:
+        - New sample idea
+        - Improve existing sample
+        - Documentation improvement
+        - Tooling or workflow improvement
+    validations:
+      required: true
+  - type: input
+    id: sample_name
+    attributes:
+      label: Target sample name
+      description: Leave blank if this is a brand new sample concept.
+      placeholder: ShareNNN_GameName
+    validations:
+      required: false
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What learning or workflow problem are you trying to solve?
+      placeholder: Describe the gap clearly.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe your preferred approach.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and acceptance criteria
+      description: List concrete outcomes to consider this complete.
+      placeholder: |
+        - [ ] Acceptance criterion 1
+        - [ ] Acceptance criterion 2
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Optional alternatives or trade-offs.
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Optional links to related repos, docs, videos, or examples.

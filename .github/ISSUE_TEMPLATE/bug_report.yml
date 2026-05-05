@@ -1,0 +1,78 @@
+name: Bug report
+description: Report a reproducible problem in a Unity sample
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please provide clear repro steps so we can investigate quickly.
+  - type: input
+    id: sample_name
+    attributes:
+      label: Sample name
+      description: Example: Share002_PixelShooter3D
+      placeholder: ShareNNN_GameName
+    validations:
+      required: true
+  - type: input
+    id: unity_version
+    attributes:
+      label: Unity version
+      placeholder: 2022.3.xf1
+    validations:
+      required: true
+  - type: input
+    id: scene_path
+    attributes:
+      label: Entry scene path
+      placeholder: Assets/Scenes/Main.unity
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide exact steps from opening the project to seeing the issue.
+      placeholder: |
+        1. Open sample project
+        2. Open entry scene
+        3. Press Play
+        4. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Repro frequency
+      options:
+        - Always
+        - Often
+        - Sometimes
+        - Rarely
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or error messages
+      description: Paste relevant Console stack traces.
+      render: shell
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshots or video links
+      description: Optional, but very helpful for gameplay bugs.
