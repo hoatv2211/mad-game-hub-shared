@@ -413,6 +413,39 @@
             color: var(--bg-dark);
         }
 
+        /* ===== Game Thumbnail ===== */
+        .game-thumbnail {
+            width: 100%;
+            max-width: 280px;
+            height: 160px;
+            border-radius: 12px;
+            border: 2px solid rgba(124, 58, 237, 0.5);
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.4);
+            display: block;
+        }
+
+        .game-thumbnail svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .game-thumbnail::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,0,0,0.08) 0px,
+                rgba(0,0,0,0.08) 1px,
+                transparent 1px,
+                transparent 4px
+            );
+            pointer-events: none;
+        }
+
         .carousel-nav {
             display: flex;
             justify-content: center;
@@ -699,6 +732,71 @@
                 <div class="carousel-slide">
                     <iframe src="https://hoatv2211.github.io/Share001_Ludo/" title="Share001 Ludo Live Demo" loading="lazy"></iframe>
                     <div class="carousel-info">
+                        <!-- Ludo Thumbnail -->
+                        <div class="game-thumbnail">
+                            <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="ludo-bg" cx="50%" cy="50%" r="70%">
+                                        <stop offset="0%" stop-color="#1e1040"/>
+                                        <stop offset="100%" stop-color="#0a0820"/>
+                                    </radialGradient>
+                                    <filter id="ludo-glow">
+                                        <feGaussianBlur stdDeviation="2" result="blur"/>
+                                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                    </filter>
+                                </defs>
+                                <!-- Background -->
+                                <rect width="280" height="160" fill="url(#ludo-bg)"/>
+                                <!-- Stars -->
+                                <circle cx="20" cy="15" r="1" fill="#ffffff" opacity="0.6"/>
+                                <circle cx="55" cy="8" r="1.5" fill="#ffffff" opacity="0.5"/>
+                                <circle cx="230" cy="20" r="1" fill="#ffffff" opacity="0.7"/>
+                                <circle cx="260" cy="10" r="1" fill="#ffffff" opacity="0.4"/>
+                                <circle cx="15" cy="130" r="1" fill="#ffffff" opacity="0.5"/>
+                                <circle cx="265" cy="145" r="1.5" fill="#ffffff" opacity="0.6"/>
+                                <!-- Ludo Board (pixel art) -->
+                                <!-- Board outer frame -->
+                                <rect x="75" y="20" width="130" height="120" rx="4" fill="#2a1060" stroke="#7C3AED" stroke-width="2"/>
+                                <!-- Red zone (top-left) -->
+                                <rect x="79" y="24" width="50" height="50" rx="2" fill="#C0392B"/>
+                                <circle cx="95" cy="40" r="7" fill="#ff6b6b" stroke="white" stroke-width="1.5"/>
+                                <circle cx="113" cy="40" r="7" fill="#ff6b6b" stroke="white" stroke-width="1.5"/>
+                                <circle cx="95" cy="57" r="7" fill="#ff6b6b" stroke="white" stroke-width="1.5"/>
+                                <circle cx="113" cy="57" r="7" fill="#ff6b6b" stroke="white" stroke-width="1.5"/>
+                                <!-- Blue zone (top-right) -->
+                                <rect x="151" y="24" width="50" height="50" rx="2" fill="#1A5276"/>
+                                <circle cx="167" cy="40" r="7" fill="#5dade2" stroke="white" stroke-width="1.5"/>
+                                <circle cx="185" cy="40" r="7" fill="#5dade2" stroke="white" stroke-width="1.5"/>
+                                <circle cx="167" cy="57" r="7" fill="#5dade2" stroke="white" stroke-width="1.5"/>
+                                <circle cx="185" cy="57" r="7" fill="#5dade2" stroke="white" stroke-width="1.5"/>
+                                <!-- Green zone (bottom-left) -->
+                                <rect x="79" y="86" width="50" height="50" rx="2" fill="#1E8449"/>
+                                <circle cx="95" cy="102" r="7" fill="#52be80" stroke="white" stroke-width="1.5"/>
+                                <circle cx="113" cy="102" r="7" fill="#52be80" stroke="white" stroke-width="1.5"/>
+                                <circle cx="95" cy="119" r="7" fill="#52be80" stroke="white" stroke-width="1.5"/>
+                                <circle cx="113" cy="119" r="7" fill="#52be80" stroke="white" stroke-width="1.5"/>
+                                <!-- Yellow zone (bottom-right) -->
+                                <rect x="151" y="86" width="50" height="50" rx="2" fill="#784212"/>
+                                <circle cx="167" cy="102" r="7" fill="#f0b429" stroke="white" stroke-width="1.5"/>
+                                <circle cx="185" cy="102" r="7" fill="#f0b429" stroke="white" stroke-width="1.5"/>
+                                <circle cx="167" cy="119" r="7" fill="#f0b429" stroke="white" stroke-width="1.5"/>
+                                <circle cx="185" cy="119" r="7" fill="#f0b429" stroke="white" stroke-width="1.5"/>
+                                <!-- Center star -->
+                                <polygon points="140,70 144,80 155,80 146,87 149,98 140,91 131,98 134,87 125,80 136,80" fill="#A78BFA" opacity="0.9" filter="url(#ludo-glow)"/>
+                                <!-- Dice (right side decoration) -->
+                                <rect x="218" y="55" width="36" height="36" rx="4" fill="#2a1060" stroke="#A78BFA" stroke-width="2" filter="url(#ludo-glow)"/>
+                                <circle cx="226" cy="63" r="3" fill="#A78BFA"/>
+                                <circle cx="236" cy="63" r="3" fill="#A78BFA"/>
+                                <circle cx="246" cy="63" r="3" fill="#A78BFA"/>
+                                <circle cx="226" cy="73" r="3" fill="#A78BFA"/>
+                                <circle cx="246" cy="73" r="3" fill="#A78BFA"/>
+                                <circle cx="226" cy="83" r="3" fill="#A78BFA"/>
+                                <circle cx="236" cy="83" r="3" fill="#A78BFA"/>
+                                <circle cx="246" cy="83" r="3" fill="#A78BFA"/>
+                                <!-- Label -->
+                                <text x="140" y="152" text-anchor="middle" font-family="monospace" font-size="9" fill="#A78BFA" opacity="0.8" letter-spacing="2">LUDO</text>
+                            </svg>
+                        </div>
                         <h3 class="neon-glow-purple">Share001_Ludo</h3>
                         <p>Classic Ludo board game reimagined in Unity. Multiplayer-ready with smooth dice rolling animations and interactive game board.</p>
                         <div class="carousel-links">
@@ -712,8 +810,129 @@
                 <div class="carousel-slide">
                     <iframe src="https://hoatv2211.github.io/Share002_PixelShooter3D/" title="Share002 PixelShooter3D Live Demo" loading="lazy"></iframe>
                     <div class="carousel-info">
+                        <!-- PixelShooter3D Thumbnail -->
+                        <div class="game-thumbnail" style="border-color: rgba(255,45,149,0.5); box-shadow: 0 0 20px rgba(255,45,149,0.3), inset 0 0 20px rgba(0,0,0,0.4);">
+                            <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="ps-bg" cx="50%" cy="40%" r="70%">
+                                        <stop offset="0%" stop-color="#1a1035"/>
+                                        <stop offset="100%" stop-color="#0a0818"/>
+                                    </radialGradient>
+                                    <filter id="ps-glow">
+                                        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                    </filter>
+                                    <filter id="ps-glow-sm">
+                                        <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                    </filter>
+                                </defs>
+                                <!-- Background -->
+                                <rect width="280" height="160" fill="url(#ps-bg)"/>
+                                <!-- Floor -->
+                                <rect x="0" y="128" width="280" height="32" fill="#0d0a22"/>
+                                <rect x="0" y="126" width="280" height="3" fill="#6d28d9" opacity="0.6"/>
+                                <!-- Belt conveyor -->
+                                <rect x="15" y="132" width="175" height="18" rx="3" fill="#1e1060" stroke="#4c1d95" stroke-width="1.5"/>
+                                <line x1="25" y1="132" x2="25" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
+                                <line x1="55" y1="132" x2="55" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
+                                <line x1="85" y1="132" x2="85" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
+                                <line x1="115" y1="132" x2="115" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
+                                <line x1="145" y1="132" x2="145" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
+                                <polyline points="170,138 176,141 170,144" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0.7"/>
+                                <!-- Active Pig (pink, on belt, shooting red) -->
+                                <g transform="translate(58, 125)" filter="url(#ps-glow-sm)">
+                                    <ellipse cx="12" cy="14" rx="10" ry="9" fill="#f9a8d4"/>
+                                    <circle cx="12" cy="6" r="7" fill="#f9a8d4"/>
+                                    <ellipse cx="12" cy="8" rx="4" ry="3" fill="#fbbf24"/>
+                                    <circle cx="10.5" cy="8" r="1" fill="#92400e"/>
+                                    <circle cx="13.5" cy="8" r="1" fill="#92400e"/>
+                                    <circle cx="9" cy="4" r="1.5" fill="#1e1b4b"/>
+                                    <circle cx="15" cy="4" r="1.5" fill="#1e1b4b"/>
+                                    <ellipse cx="6" cy="2" rx="3" ry="2.5" fill="#f9a8d4" transform="rotate(-20,6,2)"/>
+                                    <ellipse cx="18" cy="2" rx="3" ry="2.5" fill="#f9a8d4" transform="rotate(20,18,2)"/>
+                                    <rect x="5" y="11" width="14" height="6" rx="2" fill="#dc2626"/>
+                                    <text x="12" y="17" text-anchor="middle" font-family="monospace" font-size="5" fill="white" font-weight="bold">RED</text>
+                                </g>
+                                <!-- Waiting pigs on deck -->
+                                <g transform="translate(20, 130)" opacity="0.75">
+                                    <circle cx="10" cy="8" r="7" fill="#86efac"/>
+                                    <ellipse cx="10" cy="10" rx="3.5" ry="2.5" fill="#4ade80"/>
+                                    <circle cx="8.5" cy="6.5" r="1.2" fill="#14532d"/>
+                                    <circle cx="11.5" cy="6.5" r="1.2" fill="#14532d"/>
+                                    <rect x="5" y="13" width="10" height="4" rx="1.5" fill="#16a34a"/>
+                                    <text x="10" y="17" text-anchor="middle" font-family="monospace" font-size="4" fill="white" font-weight="bold">GRN</text>
+                                </g>
+                                <g transform="translate(112, 130)" opacity="0.7">
+                                    <circle cx="10" cy="8" r="7" fill="#93c5fd"/>
+                                    <ellipse cx="10" cy="10" rx="3.5" ry="2.5" fill="#60a5fa"/>
+                                    <circle cx="8.5" cy="6.5" r="1.2" fill="#1e3a8a"/>
+                                    <circle cx="11.5" cy="6.5" r="1.2" fill="#1e3a8a"/>
+                                    <rect x="5" y="13" width="10" height="4" rx="1.5" fill="#2563eb"/>
+                                    <text x="10" y="17" text-anchor="middle" font-family="monospace" font-size="4" fill="white" font-weight="bold">BLU</text>
+                                </g>
+                                <!-- Bullet arc (homing toward red block) -->
+                                <path d="M 70 124 Q 110 60 168 38" stroke="#dc2626" stroke-width="2" fill="none" stroke-dasharray="4,3" opacity="0.8" filter="url(#ps-glow-sm)"/>
+                                <circle cx="128" cy="75" r="4" fill="#dc2626" filter="url(#ps-glow)"/>
+                                <circle cx="128" cy="75" r="2" fill="#fca5a5"/>
+                                <!-- Block grid (colorful, image-to-blocks style) -->
+                                <!-- Row 1 -->
+                                <rect x="100" y="10" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                                <rect x="120" y="10" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                                <rect x="140" y="10" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+                                <rect x="160" y="10" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
+                                <rect x="180" y="10" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
+                                <rect x="200" y="10" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
+                                <rect x="220" y="10" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                                <!-- Row 2 -->
+                                <rect x="100" y="30" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
+                                <rect x="120" y="30" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
+                                <rect x="140" y="30" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                                <rect x="160" y="30" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                                <rect x="180" y="30" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+                                <rect x="200" y="30" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
+                                <rect x="220" y="30" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
+                                <!-- Row 3 -->
+                                <rect x="100" y="50" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
+                                <rect x="120" y="50" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                                <rect x="140" y="50" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
+                                <!-- Target block being hit -->
+                                <rect x="160" y="50" width="18" height="18" rx="2" fill="#dc2626" stroke="#fca5a5" stroke-width="2" filter="url(#ps-glow)"/>
+                                <text x="169" y="62" text-anchor="middle" font-family="monospace" font-size="11" fill="white" opacity="0.9">✕</text>
+                                <rect x="180" y="50" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
+                                <rect x="200" y="50" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
+                                <rect x="220" y="50" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+                                <!-- Row 4 -->
+                                <rect x="100" y="70" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
+                                <rect x="120" y="70" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+                                <rect x="140" y="70" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                                <rect x="160" y="70" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
+                                <rect x="180" y="70" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                                <rect x="200" y="70" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
+                                <rect x="220" y="70" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
+                                <!-- Row 5 -->
+                                <rect x="100" y="90" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+                                <rect x="120" y="90" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
+                                <rect x="140" y="90" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
+                                <rect x="160" y="90" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
+                                <rect x="180" y="90" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
+                                <rect x="200" y="90" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
+                                <rect x="220" y="90" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+                                <!-- Explosion particles -->
+                                <circle cx="155" cy="55" r="3" fill="#fca5a5" opacity="0.9" filter="url(#ps-glow-sm)"/>
+                                <circle cx="184" cy="52" r="2.5" fill="#fed7aa" opacity="0.8" filter="url(#ps-glow-sm)"/>
+                                <circle cx="172" cy="44" r="2" fill="#fef08a" opacity="0.9" filter="url(#ps-glow-sm)"/>
+                                <circle cx="162" cy="45" r="3.5" fill="#FF8C00" opacity="0.6" filter="url(#ps-glow)"/>
+                                <!-- HUD -->
+                                <text x="6" y="12" font-family="monospace" font-size="7" fill="#a78bfa" opacity="0.8">SCORE</text>
+                                <text x="6" y="22" font-family="monospace" font-size="9" fill="#c4b5fd" opacity="0.9" font-weight="bold">04860</text>
+                                <text x="6" y="36" font-family="monospace" font-size="7" fill="#a78bfa" opacity="0.8">AMMO: 5</text>
+                                <!-- Label -->
+                                <text x="140" y="158" text-anchor="middle" font-family="monospace" font-size="8" fill="#FF2D95" opacity="0.8" letter-spacing="1">PIXEL SHOOTER 3D</text>
+                            </svg>
+                        </div>
                         <h3 class="neon-glow-pink">Share002_PixelShooter3D</h3>
-                        <p>3D pixel art shooter with wave-based enemy system, power-ups, and score tracking. Retro aesthetics meet modern gameplay.</p>
+                        <p>Pig-based color-matching 3D block shooter. Shoot color-coded bullets to destroy matching blocks, with conveyor belt mechanics and level editor.</p>
                         <div class="carousel-links">
                             <a href="https://hoatv2211.github.io/Share002_PixelShooter3D/" target="_blank" class="carousel-btn carousel-btn-play cursor-pointer">PLAY NOW</a>
                             <a href="https://github.com/hoatv2211/Share002_PixelShooter3D" target="_blank" class="carousel-btn carousel-btn-source cursor-pointer">SOURCE</a>

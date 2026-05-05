@@ -39,7 +39,37 @@ Primary goals for coding agents:
 - Do not add generated binaries or large assets by default.
 - If build/test commands are not documented yet, avoid guessing destructive workflows.
 
+## Web/UI Development
+
+When the user asks to build a **web page, landing page, portfolio page, dashboard, or any UI component** (HTML, Tailwind, React, Next.js…), you **must** use the `ui-ux-pro-max` skill installed at `.claude/skills/ui-ux-pro-max/`.
+
+### Required Workflow
+
+1. **Analyze** requirements (product type, style, industry, stack).
+2. **Generate design system first** (always run before implementing):
+   ```
+   python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<product> <industry> <style>" --design-system -p "Project Name"
+   ```
+3. **Get stack-specific guidelines** (default stack: `html-tailwind`):
+   ```
+   python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --stack html-tailwind
+   ```
+4. **Implement** following the design system and guidelines.
+
+### Trigger Phrases
+Any of the following should activate this workflow:
+- "tạo landing page", "tạo web", "tạo trang", "build page", "create website"
+- "thiết kế UI", "làm dashboard", "portfolio page", "sample index page"
+- Any `.html`, `.tsx`, `.vue`, `.svelte` file creation task
+
+### Rules
+- Never use emojis as icons — use SVG from Heroicons or Lucide.
+- Minimum 4.5:1 color contrast ratio for all text.
+- Always run `--design-system` before writing any UI code.
+- Default to `html-tailwind` stack unless user specifies otherwise.
+- Check Pre-Delivery Checklist in `.claude/skills/ui-ux-pro-max/SKILL.md` before delivering.
+
 ## Suggested Next Customizations
-- Add .github/instructions/unity.instructions.md for Unity-specific coding rules (folder layout, scene conventions, ScriptableObject usage).
-- Add .github/instructions/contribution.instructions.md for PR checklist style (docs update, sample scene validation, naming consistency).
-- Add .github/prompts/new-sample.prompt.md to scaffold a new mini-game sample consistently.
+- Add `.github/instructions/unity.instructions.md` for Unity-specific coding rules (folder layout, scene conventions, ScriptableObject usage).
+- Add `.github/instructions/contribution.instructions.md` for PR checklist style (docs update, sample scene validation, naming consistency).
+- Add `.github/prompts/new-sample.prompt.md` to scaffold a new mini-game sample consistently.
