@@ -4,28 +4,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Unity game sample hub for learning and portfolio building. Contains standalone Unity mini-game samples following a consistent format. Each sample is isolated and can be opened independently in Unity.
+Unity game sample showcase for learning and portfolio building. This repository focuses on showcase pages and metadata, while source code and demos are hosted externally.
 
 ## Repository Structure
 
-- `samples/ShareNNN_GameName/` — Individual Unity samples (numeric prefix, PascalCase name)
+- `docs/ShareNNN_GameName.html` — Individual showcase pages
+- `docs/data/games.json` — Metadata registry for showcase entries
 - `docs/PROJECT_FORMAT.md` — Canonical format and naming conventions
 - `AGENTS.md` — Rules for coding agents working in this repo
 - `CONTRIBUTING.md` — PR checklist and contribution workflow
 
 Note: `demos/` and `hubs/` directories exist but are currently empty.
 
-## Sample Format
+## Showcase Entry Format
 
-Each sample must follow `ShareNNN_GameName` naming (zero-padded 3-digit number). Structure per sample:
+Each entry follows `ShareNNN_GameName` naming (zero-padded 3-digit number). Each entry should include:
 
 ```
-ShareNNN_GameName/
-  README.md          # Required: overview, Unity version, entry scene, run steps
-  project/           # Unity project root
-    Assets/
-    Packages/
-    ProjectSettings/
+docs/data/games.json entry
+docs/ShareNNN_GameName.html
+external source repository link
+optional external live demo link
 ```
 
 ## Key Conventions
@@ -36,28 +35,26 @@ ShareNNN_GameName/
 - **No generated binaries**: don't commit build artifacts or large assets
 - **Documentation**: update nearest relevant doc in the same PR; link instead of duplicating
 
-## Working with Samples
+## Working with Showcase Entries
 
-- Entry scene path and Unity version must be documented in each sample's README
-- Preserve backward compatibility of public APIs and scene wiring
-- Use plain C# readability over complex patterns for shared sample code
-- Keep Unity lifecycle behavior explicit (avoid hidden side effects in Awake/Update/etc.)
+- Keep metadata fields complete and consistent in `docs/data/games.json`
+- Ensure external links are reachable and correct
+- Keep learning outcomes concise and useful for portfolio readers
+- Keep page content aligned with linked source repository
 
 ## Commit Messages
 
 Use conventional format with scope:
-- `feat(sample): add Share003_TowerDefense prototype loop`
-- `docs(sample): add setup notes for Share002_PixelShooter3D`
-- `fix(sample): remove hidden side effect in player update`
+- `docs(showcase): add Share003_TowerDefense entry`
+- `fix(links): update Share002 source repository URL`
+- `chore(metadata): refine learning outcomes for Share001`
 
 ## Build / Test
 
-No automated build or test commands are configured yet. Samples are validated by:
-1. Opening the Unity project
-2. Loading the documented entry scene
-3. Entering Play mode
-
-When adding samples, document Unity version and required packages in the sample README.
+No automated build or test commands are configured yet. Showcase updates are validated by:
+1. Checking sample pages render correctly
+2. Verifying metadata JSON is valid
+3. Verifying external links resolve
 
 ## Web/UI Development (UI/UX Pro Max Skill)
 

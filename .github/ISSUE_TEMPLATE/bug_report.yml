@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible problem in a Unity sample
+description: Report a reproducible problem in showcase pages, metadata, or links
 title: "[Bug]: "
 labels:
   - bug
@@ -8,6 +8,7 @@ body:
     attributes:
       value: |
         Thanks for reporting a bug. Please provide clear repro steps so we can investigate quickly.
+        This repository is showcase-only; source projects are hosted externally.
   - type: input
     id: sample_name
     attributes:
@@ -17,28 +18,21 @@ body:
     validations:
       required: true
   - type: input
-    id: unity_version
+    id: showcase_page
     attributes:
-      label: Unity version
-      placeholder: 2022.3.xf1
-    validations:
-      required: true
-  - type: input
-    id: scene_path
-    attributes:
-      label: Entry scene path
-      placeholder: Assets/Scenes/Main.unity
+      label: Showcase page
+      placeholder: docs/Share002_PixelShooter3D.html
     validations:
       required: true
   - type: textarea
     id: steps
     attributes:
       label: Steps to reproduce
-      description: Provide exact steps from opening the project to seeing the issue.
+      description: Provide exact steps from opening the showcase page or link to seeing the issue.
       placeholder: |
-        1. Open sample project
-        2. Open entry scene
-        3. Press Play
+        1. Open docs page
+        2. Click source or demo link
+        3. Observe issue
         4. ...
     validations:
       required: true

@@ -1,5 +1,5 @@
 ---
-name: "UI Designer"
+name: "UI Designer Agent"
 description: "Use when: tạo landing page, tạo web, thiết kế UI, làm dashboard, portfolio page, sample index page, build page, create website, design component, .html .tsx .vue .svelte file, glassmorphism, dark mode, Tailwind, React, Next.js, shadcn/ui, color palette, typography, layout, responsive, accessibility review"
 tools: [read, edit, search, execute, web]
 argument-hint: "Describe the page or component to design (product type, style, stack, target audience)"

@@ -1,0 +1,64 @@
+{
+  "games": [
+    {
+      "id": "share001-ludo",
+      "number": 1,
+      "title": "Share001_Ludo",
+      "slug": "share001-ludo",
+      "genre": "Board Game",
+      "difficulty": "Beginner",
+      "status": "showcase-only",
+      "description": "Turn-based Ludo sample focused on deterministic board logic and player turns.",
+      "learningOutcomes": [
+        "Deterministic turn-based gameplay loop",
+        "Rule-driven board movement",
+        "Simple game-state to UI synchronization"
+      ],
+      "links": {
+        "sampleDoc": "Share001_Ludo.html",
+        "liveDemo": "https://hoatv2211.github.io/Share001_Ludo/",
+        "sourceRepo": "https://github.com/hoatv2211/Share001_Ludo"
+      }
+    },
+    {
+      "id": "share002-pixelshooter3d",
+      "number": 2,
+      "title": "Share002_PixelShooter3D",
+      "slug": "share002-pixelshooter3d",
+      "genre": "Action Shooter",
+      "difficulty": "Intermediate",
+      "status": "showcase-only",
+      "description": "3D shooter sample with combat loop, enemy spawning, and scoring.",
+      "learningOutcomes": [
+        "Action combat loop and cooldown",
+        "Enemy spawn pacing",
+        "Score and game progression basics"
+      ],
+      "links": {
+        "sampleDoc": "Share002_PixelShooter3D.html",
+        "liveDemo": "https://hoatv2211.github.io/Share002_PixelShooter3D/",
+        "sourceRepo": "https://github.com/hoatv2211/Share002_PixelShooter3D"
+      }
+    },
+    {
+      "id": "share003-ageofbattle",
+      "number": 3,
+      "title": "Share003_AgeOfBattle",
+      "slug": "share003-ageofbattle",
+      "genre": "Strategy / Battle",
+      "difficulty": "Intermediate",
+      "status": "showcase-only",
+      "description": "Strategy battle sample focused on unit waves, positioning, and combat progression.",
+      "learningOutcomes": [
+        "Wave scheduling and progression",
+        "Combat flow and unit interaction",
+        "Basic progression and balancing"
+      ],
+      "links": {
+        "sampleDoc": "Share003_AgeOfBattle.html",
+        "liveDemo": "https://hoatv2211.github.io/Share003_AgeOfBattle/",
+        "sourceRepo": "https://github.com/hoatv2211/Share003_AgeOfBattle"
+      }
+    }
+  ]
+}

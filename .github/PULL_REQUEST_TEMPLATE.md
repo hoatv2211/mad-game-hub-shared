@@ -3,25 +3,23 @@
 - Why is this needed?
 
 ## Type Of Change
-- [ ] New sample
-- [ ] Feature update
-- [ ] Bug fix
-- [ ] Refactor
+- [ ] Showcase entry update
+- [ ] Metadata update
+- [ ] Link fix
 - [ ] Documentation
 - [ ] Other (describe below)
 
 ## Related Issue
 Closes #
 
-## Unity And Sample Info
-- Unity version:
-- Sample name (for example Share001_Ludo):
-- Entry scene path:
+## Showcase Info
+- Sample name (for example Share002_PixelShooter3D):
+- Sample page (for example docs/Share002_PixelShooter3D.html):
 
 ## What Was Tested
-- [ ] Opened project successfully
-- [ ] Entry scene runs in Play Mode
-- [ ] No unexpected scene wiring break
+- [ ] Links open correctly (`sourceRepo` and `liveDemo` where applicable)
+- [ ] `docs/data/games.json` is valid JSON
+- [ ] Sample page content matches metadata
 - [ ] Docs updated near the change
 
 Test notes:

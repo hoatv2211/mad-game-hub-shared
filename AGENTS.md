@@ -1,31 +1,31 @@
 # AGENTS.md
 
 ## Purpose
-This repository shares Unity game source code and blueprint-style examples for learning and portfolio building.
+This repository is a showcase hub for Unity game samples used for learning and portfolio presentation.
 
 Primary goals for coding agents:
-- Keep examples educational, readable, and easy to adapt.
+- Keep showcase pages educational, readable, and easy to navigate.
 - Preserve beginner-friendly structure over over-engineering.
-- Favor practical prototype velocity while keeping code quality stable.
+- Favor clear metadata and link quality for portfolio usage.
 
 ## Project Context
 - Source of truth for project intent: [README.md](README.md)
 - Repository format standard: [docs/PROJECT_FORMAT.md](docs/PROJECT_FORMAT.md)
-- Contribution workflow: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Showcase contribution workflow: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Current repository is minimal and may be expanded into multiple Unity sample modules over time.
 
 ## Agent Working Rules
-- Treat this as an open-source teaching project first, production game second.
-- Prefer clear naming, short methods, and comments only when needed for learning context.
-- Avoid introducing complex architecture unless it solves a real maintainability issue.
+- Treat this as a showcase-first documentation project.
+- Prioritize accurate external links to source repositories and live demos.
+- Avoid introducing local Unity project requirements in this repository.
 - Keep dependencies lightweight and justify any new package in pull-request notes.
-- Preserve backward compatibility of public example APIs and scene wiring where possible.
+- Preserve naming consistency and metadata quality across sample entries.
 
 ## Unity-Focused Conventions
-- Use deterministic, easy-to-test gameplay logic where possible.
-- Keep game loop behavior explicit and avoid hidden side effects in lifecycle callbacks.
-- For shared sample code, prioritize plain C# readability over clever abstractions.
-- Add concise setup notes when adding a new sample folder (scene entry point, required assets, run steps).
+- Describe gameplay behavior in clear, beginner-friendly language.
+- Keep architecture notes concise and useful for learning context.
+- For sample entries, include setup notes and links to external source repositories.
+- Do not assume source code is stored locally in this repository.
 
 ## Documentation Guidance
 - Link to existing docs instead of duplicating long explanations.
@@ -38,6 +38,7 @@ Primary goals for coding agents:
 - Do not rename files/folders or reorganize project structure unless explicitly requested.
 - Do not add generated binaries or large assets by default.
 - If build/test commands are not documented yet, avoid guessing destructive workflows.
+- Default to documentation and metadata updates for showcase entries.
 
 ## Web/UI Development
 
@@ -70,6 +71,6 @@ Any of the following should activate this workflow:
 - Check Pre-Delivery Checklist in `.claude/skills/ui-ux-pro-max/SKILL.md` before delivering.
 
 ## Suggested Next Customizations
-- Add `.github/instructions/unity.instructions.md` for Unity-specific coding rules (folder layout, scene conventions, ScriptableObject usage).
-- Add `.github/instructions/contribution.instructions.md` for PR checklist style (docs update, sample scene validation, naming consistency).
-- Add `.github/prompts/new-sample.prompt.md` to scaffold a new mini-game sample consistently.
+- Add `.github/instructions/showcase.instructions.md` for metadata schema and link validation rules.
+- Add `.github/instructions/contribution.instructions.md` for docs and metadata review checklist.
+- Add `.github/prompts/new-showcase-entry.prompt.md` to scaffold a new sample page consistently.

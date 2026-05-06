@@ -1,29 +1,26 @@
 # Project Format
 
-This document defines the standard format for this repository so all shared Unity samples stay consistent and portfolio-ready.
+This document defines the standard format for this repository in showcase-only mode.
 
 ## Core Principles
-- Learning-first: code should be readable and teachable.
-- Prototype-fast: avoid unnecessary architecture.
-- Portfolio-ready: each sample must be easy to demonstrate.
+- Showcase-first: each sample page should clearly present gameplay and learning value.
+- Link-driven: source code and demos are external references.
+- Portfolio-ready: metadata and sample pages must stay consistent and easy to scan.
 
 ## Repository Structure
 ```text
 mad-game-hub-shared/
-  samples/
-    ShareNNN_GameName/
-      README.md
-      project/                 # Unity project root for this sample
-      Assets/
-      Packages/
-      ProjectSettings/
   docs/
+    index.html
+    ShareNNN_GameName.html
+    data/
+      games.json
     PROJECT_FORMAT.md
 ```
 
 Notes:
-- Keep each sample isolated so users can clone and open one sample independently.
-- If a sample is only blueprint-level, include enough files and docs for learners to follow.
+- This repository does not host Unity project source folders.
+- Source and demo links are maintained as external references in metadata and sample pages.
 
 ## Sample Naming
 Use this exact convention:
@@ -35,63 +32,31 @@ Rules:
 - `GameName` uses PascalCase with no spaces.
 
 ## Required Files Per Sample
-Each sample folder should include:
-- `README.md`
-- Unity project files under a stable structure
+Each showcase entry should include:
+- A game object in `docs/data/games.json`
+- A sample detail page in `docs/` (for example `docs/Share002_PixelShooter3D.html`)
+- External links for `sourceRepo` and optionally `liveDemo`
 
-Each sample `README.md` should include:
-- Summary of gameplay and learning goals
-- Unity version
-- Entry scene path
-- Required packages/assets
-- Run steps
-- Known limitations and next improvements
-
-## Recommended Sample README Template
-```md
-# ShareNNN_GameName
-
-## Overview
-Short summary of this sample and what it demonstrates.
-
-## Learning Goals
-- Goal 1
-- Goal 2
-
-## Tech Info
-- Unity version:
-- Target platform:
-
-## Entry Scene
-- Scene path:
-
-## Requirements
-- Packages:
-- External assets:
-
-## Run
-1. Open project in Unity.
-2. Open entry scene.
-3. Press Play.
-
-## Roadmap
-- [ ] Next improvement 1
-- [ ] Next improvement 2
-```
+## Required Metadata Fields
+Each game in `docs/data/games.json` should include:
+- `id`, `number`, `title`, `slug`
+- `genre`, `difficulty`, `status`
+- `description`, `learningOutcomes`
+- `links.sampleDoc`, `links.sourceRepo`, `links.liveDemo`
 
 ## Documentation Rules
 - Link to existing docs instead of duplicating long text.
 - Keep setup instructions short and actionable.
-- Update nearby docs in the same PR when behavior changes.
+- Update nearby docs and metadata in the same PR.
 
 ## Asset And File Hygiene
 - Do not commit unnecessary generated artifacts.
-- Keep sample assets scoped to the sample folder.
+- Keep showcase assets scoped to the repository asset folders.
 - Prefer lightweight placeholder assets for learning examples.
 
 ## Review Criteria
-A sample is considered ready when:
-- It runs from the documented entry scene.
-- Setup instructions are accurate.
-- Folder and naming conventions are respected.
-- Code readability supports learning use cases.
+A showcase entry is considered ready when:
+- `games.json` contains complete and valid metadata.
+- Sample page exists and matches metadata.
+- External source and demo links are valid.
+- Naming conventions are respected.
