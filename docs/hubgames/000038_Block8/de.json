@@ -1,0 +1,8 @@
+{
+	"game":{
+		"over":"Spiel vorbei",
+		"you":"Ergebnis",
+		"best":"Bestes Ergebnis"
+	},
+ 	"error":"Fehler: Sie haben die Popupblockierung aktiviert"
+}

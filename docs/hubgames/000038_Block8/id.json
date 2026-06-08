@@ -1,0 +1,8 @@
+{
+	"game":{
+		"over":"Permainan sudah berakhir",
+		"you":"Skor",
+		"best":"Skor terbaik"
+	},
+ 	"error":"Kesalahan: Anda mengaktifkan pemblokir pop-up"
+}

@@ -1,0 +1,9 @@
+{
+	"game":{
+		"over":"Game over",
+		"you":"You score",
+		"best":"Best score"
+		},
+	"error":"Error: You have the pop-up blocker enabled"
+	
+}

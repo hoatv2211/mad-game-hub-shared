@@ -1,0 +1,8 @@
+{
+	"game":{
+		"over":"Fim do jogo",
+		"you":"Resultado",
+		"best":"Melhor resultado"
+	},
+ 	"error":"Erro: você ativou o bloqueio de pop-ups"
+}

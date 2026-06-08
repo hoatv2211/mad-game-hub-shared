@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Billiard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script type="text/javascript" src="js/three.min.js"></script>
+
+    <script type="text/javascript" src="js/cannon.min.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+
+
+
+
+    <script type="text/javascript" src="js/OBJLoader.js"></script>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/controls.js"></script>
+    <script type="text/javascript" src="js/CannonUtils.js"></script>
+    <script type="text/javascript" src="js/Gui.js"></script>
+    <script type="text/javascript" src="js/EightBallGame.js"></script>
+    <script type="text/javascript" src="js/Arch.js"></script>
+    <script type="text/javascript" src="js/Ball.js"></script>
+    <script type="text/javascript" src="js/Hole.js"></script>
+    <script type="text/javascript" src="js/LongWall.js"></script>
+    <script type="text/javascript" src="js/ShortWall.js"></script>
+    <script type="text/javascript" src="js/Table.js"></script>
+    <script type="text/javascript" src="js/WhiteBall.js"></script>
+    <script type="text/javascript" src="js/bot.js"></script>
+    <script type="text/javascript" src="js/device.min.js"></script>
+    <script>
+        window["GD_OPTIONS"] = {
+            "gameId": "5599daed64d9456992f9029945544e1d",
+            "onEvent": function(event) {
+                switch (event.name) {
+                    case "SDK_GAME_START":
+                        // advertisement done, resume game logic and unmute audio
+                        Game.pusused = false;
+                        break;
+                    case "SDK_GAME_PAUSE":
+                        // pause game logic / mute audio
+                        Game.pusused = true;
+                        break;
+                    case "SDK_GDPR_TRACKING":
+                        // this event is triggered when your user doesn't want to be tracked
+                        break;
+                    case "SDK_GDPR_TARGETING":
+                        // this event is triggered when your user doesn't want personalised targeting of ads and such
+                        break;
+                }
+            },
+        };
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = '123.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'gamedistribution-jssdk'));
+    </script>
+
+
+</head>
+
+<body>
+    <div id="world">
+        <img src="img/up-down.png" id="hitArrow" />
+        <img src="img/arrow2.png" id="hitArrow2" />
+        <img src="img/round2.png" id="hitRound" />
+        <div id="roundDummy" /></div>
+
+    <div id="hitAnim">
+        <div></div>
+        <div></div>
+
+    </div>
+    <div id="hitLine">
+        <div>
+            <img src="img/hitline.png" />
+        </div>
+
+    </div>
+    <img src="img/hand.png" id="hand" />
+
+    </div>
+
+
+    <div id="player1balls"></div>
+    <div id="player1escBalls"></div>
+    <div id="player2balls"></div>
+    <div id="player2escBalls"></div>
+    <img id="ballsplace" src="img/forballs.png" />
+
+
+    <div id="mainmenu">
+        <!--div class="space"></div -->
+        <img src="img/logo_pool.png" id="name" />
+        <div class="space"></div>
+        <img src="img/mode.png" id="mode" />
+        <div class="space"></div>
+        <div id="mode_wrap">
+            <div id="mode0" class="shadow active">
+                <img src="img/player.png" />
+                <img src="img/vs.png" />
+                <img src="img/bot.png" />
+            </div>
+            <div id="mode1" class="shadow active">
+                <img src="img/player.png" />
+                <img src="img/vs.png" />
+                <img src="img/player.png" />
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div id="sound" class="shadow active bg">
+        <img src="img/sound.png" />
+        <img src="img/line.png" id="line" />
+    </div>
+
+    <div id="exit" class="shadow active bg">
+        <img src="img/exit.png" />
+    </div>
+
+    <div id="restart" class="shadow active bg">
+        <img src="img/restart.png" />
+    </div>
+
+    <div id="curTurn" class="">Player 1</div>
+
+    <div id="gameEnd" class="shadow bg" style="
+    border-radius: 20px;
+    background: rgb(0,153,51, 0.77);
+    background: linear-gradient(180deg, rgba(0,153,51,0.9) 0%, rgba(102,255,102,0.9) 35%, rgba(102,255,102,0.9) 65%, rgba(0,153,51,0.9) 100%);">
+        <img src="img/Winner.png" id="winner" />
+        <div id="looser"></div>
+
+        <div id="line1"></div>
+        <div id="line2"></div>
+
+
+
+        <div id="exit2" class="active">
+            <img src="img/exit.png" />
+        </div>
+
+        <div id="restart2" class="active">
+            <img src="img/restart.png" />
+        </div>
+    </div>
+
+    <div id="fullScreen" class="shadow active bg">
+        <img src="img/fullscreen.png" />
+    </div>
+
+
+
+    <div id="powerWrap">
+        <div id="power">
+
+        </div>
+    </div>
+    <img id="powerBorder" src="img/bill_power.png" />
+
+
+
+
+    <div id="loader_bg">
+        <div id="loader">
+            <div class="ball"></div>
+            <div class="ball1"></div>
+            Loading...
+        </div>
+    </div>
+
+    <div id="mainMenu"></div>
+    <div id="controlsHud"></div>
+
+
+
+    <div id="hit8">
+        Now hit "8" ball
+    </div>
+
+    <div id="howToPlay">
+
+    </div>
+
+    <audio src="Sounds/ball.mp3" id="ball"></audio>
+    <audio src="Sounds/ball01s.mp3" id="ball01"></audio>
+    <audio src="Sounds/ball02s.mp3" id="ball02"></audio>
+    <audio src="Sounds/ball03s.mp3" id="ball03"></audio>
+    <audio src="Sounds/ballball.mp3" id="ballball"></audio>
+    <audio src="Sounds/board01.mp3" id="board01"></audio>
+    <audio src="Sounds/board02.mp3" id="board02"></audio>
+    <audio src="Sounds/board03.mp3" id="board03"></audio>
+    <audio src="Sounds/dropcue07.mp3" id="dropcue07"></audio>
+    <audio src="Sounds/dropcue08.mp3" id="dropcue08"></audio>
+    <audio src="Sounds/dropcue09.mp3" id="dropcue09"></audio>
+    <audio src="Sounds/dropcue10.mp3" id="dropcue10"></audio>
+    <audio src="Sounds/hitcue05.mp3" id="hitcue05"></audio>
+    <audio src="Sounds/hitcue06.mp3" id="hitcue06"></audio>
+    <audio src="Sounds/Ending_aplodisments.mp3" id="ending"></audio>
+
+
+<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120043346-145');
+	</script>
+
+<script>
+
+	
+	function showinterst(msg){
+
+	}
+	function showreward(msg){
+
+	}
+		  
+</script>
+
+
+
+
+  
+
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+
+arrow-circle.png
+size: 196,216
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arrow_1
+  rotate: true
+  xy: 2, 164
+  size: 49, 94
+  orig: 49, 94
+  offset: 0, 0
+  index: -1
+arrow_2
+  rotate: true
+  xy: 98, 163
+  size: 50, 95
+  orig: 50, 95
+  offset: 0, 0
+  index: -1
+circle
+  rotate: true
+  xy: 2, 2
+  size: 159, 160
+  orig: 159, 160
+  offset: 0, 0
+  index: -1

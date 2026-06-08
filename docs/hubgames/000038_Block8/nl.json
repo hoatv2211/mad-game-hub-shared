@@ -1,0 +1,8 @@
+{
+	"game":{
+		"over":"Het spel is voorbij",
+		"you":"Resultaat",
+		"best":"Beste resultaat"
+	},
+ 	"error":"Fout: u hebt de pop - up blocker ingeschakeld"
+}

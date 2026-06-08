@@ -1,0 +1,11 @@
+{
+	"name": "Среди нас спасение",
+	"short_name": "Среди нас спасение",
+	"description": "Среди нас: спасение браузерная игра-головоломка HTML5",
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"orientation": "portrait",
+	"background_color": "#ffffff",
+	"icons": [],
+	"screenshots": []
+}

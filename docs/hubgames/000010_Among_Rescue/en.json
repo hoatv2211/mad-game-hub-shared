@@ -1,0 +1,13 @@
+{
+	"gm":{
+	  "lv":"LEVEL ",
+	  "lvs":"LEVELS",
+	  "TUT":"TOUCH THE KEY TO REMOVE IT",
+	  "TUT2":"HOT LAVA",
+	  "TUT3":"LAVA + WATER = STONE",
+	  "TUT4":"GET TO THE CRATE WHILE AVOIDING THE ENEMY"
+	
+	},
+	
+	"error":"Error: You have the pop-up blocker enabled"
+  }

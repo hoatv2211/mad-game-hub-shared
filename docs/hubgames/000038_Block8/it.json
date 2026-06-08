@@ -1,0 +1,8 @@
+{
+	"game":{
+		"over":"Game over",
+		"you":"Risultato",
+		"best":"Miglior risultato"
+	},
+ 	"error":"Errore: hai attivato il blocco popup"
+}

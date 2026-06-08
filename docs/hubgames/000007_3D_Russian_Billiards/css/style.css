@@ -1,0 +1,691 @@
+@font-face {
+    font-family: 'DINPro';
+    src: url('DINPro.eot?#iefix') format('embedded-opentype'), url('DINPro.otf') format('opentype'), url('DINPro.woff') format('woff'), url('DINPro.ttf') format('truetype'), url('DINPro.svg#DINPro') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: DINPro;
+    font-size: 12px;
+}
+
+body {
+    min-height: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #000;
+    color: #000;
+    overflow: hidden;
+    outline: none !important;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    overflow: hidden;
+}
+
+#world {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#timer {
+    position: absolute;
+    top: -1005px;
+    left: 5px;
+    height: 7.5%;
+    background-color: rgba(0, 194, 246, 0.8);
+    padding-top: 1vh;
+    display: none;
+}
+
+#timer img {
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 90%;
+    float: left;
+}
+
+#timer span {
+    color: #fff;
+    font-size: 7vh;
+    margin-top: -10px;
+}
+
+#mainmenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*height: 70%;*/
+    text-align: center;
+    display: none;
+}
+
+#name {
+    width: 65%;
+}
+
+.shadow {
+    box-shadow: 4px 4px 18px 9px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+}
+
+#mode {
+    width: 95%;
+}
+
+.space {
+    height: 3%;
+}
+
+#mode_wrap {
+    width: 100%;
+    height: 30%;
+    margin-left: 1%;
+}
+
+#mode0,
+#mode1 {
+    width: 42%;
+    height: 70%;
+    /*background-color: rgba(0, 204, 255, 0.6);*/
+    background-color: rgba(0, 0, 0, 0.9);
+    /* background: linear-gradient(180deg, rgba(0, 205, 255, 0.5) 0%, rgba(0, 205, 255, 0.9) 51%, rgba(0, 205, 255, 0.5) 100%); */
+    /*background-color: #6BCB00;*/
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+#mode0 {
+    float: left;
+}
+
+#mode1 {
+    float: right;
+}
+
+#mode0 img,
+#mode1 img {
+    height: 80%;
+    margin-top: 3%;
+    max-width: 30%;
+    transition: filter 0.3s ease;
+}
+
+#mode1:hover img, #mode0:hover img {
+    filter: brightness(0.7); /* Затемняем картинку при наведении */
+}
+
+.active {}
+
+.active:active {
+    /* box-shadow: 2px 2px 9px 4px rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 204, 255, 0.9);
+    margin-left: -0.5%; */
+    margin-top: -0.1%;
+}
+
+#sound {
+    position: absolute;
+    width: 5%;
+    min-width: 40px;
+    bottom: 1%;
+    text-align: center;
+    z-index: 10;
+}
+
+#sound img {
+    height: 80%;
+    margin-top: 10%;
+}
+
+#sound #line {
+    height: 75%;
+    margin-left: 12%;
+}
+
+.bg {
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px rgba(255, 255, 255, .3);
+    background: rgb(160, 176, 166) linear-gradient(rgb(152, 163, 153), rgb(160, 176, 166));
+    box-shadow:
+        inset 0 -2px 1px rgba(255, 255, 255, .9),
+        inset 0 2px 1px rgba(0, 0, 0, .5),
+        0 4px 4px rgba(0, 0, 0, .9);
+    border-radius: 100%;
+    border: 15px solid rgba(188, 204, 193, 1);
+    /* background: linear-gradient(180deg, rgba(0, 205, 255, 0.6) 0%, rgba(0, 205, 255, 0.9) 51%, rgba(0, 205, 255, 0.6) 100%); */
+    /*background-color: rgba(153, 51, 51, 0.6);*/
+}
+
+.bg:hover {
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px rgba(255, 255, 255, .3);
+    background: rgb(160, 176, 166) linear-gradient(rgb(120, 129, 121), rgb(130, 143, 135));
+    box-shadow:
+        inset 0 -2px 1px rgba(255, 255, 255, .9),
+        inset 0 2px 1px rgba(0, 0, 0, .5),
+        0 4px 4px rgba(0, 0, 0, .9);
+    border-radius: 100%;
+    border: 15px solid rgb(163, 175, 167);
+    /* background: linear-gradient(180deg, rgba(0, 205, 255, 0.6) 0%, rgba(0, 205, 255, 0.9) 51%, rgba(0, 205, 255, 0.6) 100%); */
+    /*background-color: rgba(153, 51, 51, 0.6);*/
+}
+
+#exit {
+    position: absolute;
+    width: 5%;
+    min-width: 40px;
+    text-align: center;
+    display: none;
+    z-index: 10;
+}
+
+#exit2 {
+    position: absolute;
+    width: 15%;
+    min-width: 40px;
+    bottom: 7%;
+    left: 65%;
+    text-align: center;
+}
+
+#exit img {
+    height: 60%;
+    margin-top: 20%;
+    margin-left: 1%;
+}
+
+#exit2 img {
+    height: 100%;
+}
+
+#restart {
+    position: absolute;
+    width: 5%;
+    min-width: 40px;
+    text-align: center;
+    display: none;
+    z-index: 10;
+}
+
+#restart2 {
+    position: absolute;
+    width: 15%;
+    min-width: 40px;
+    bottom: 7%;
+    right: 65%;
+    text-align: center;
+}
+
+#restart img {
+    height: 75%;
+    margin-top: 10%;
+}
+
+#restart2 img {
+    height: 100%;
+}
+
+#curTurn {
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    height: 8%;
+    text-align: center;
+    color: #fff;
+    font-size: 3.2vh;
+    display: none;
+    /*text-shadow: -0 -1px 0 #000000, 0 -1px 0 #000000, -0 1px 0 #000000, 0 1px 0 #000000, -1px -0 0 #000000, 1px -0 0 #000000, -1px 0 0 #000000, 1px 0 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;*/
+}
+
+#line {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#gameEnd {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    text-align: center;
+    font-size: 3.8vh;
+    color: #f6d103;
+    font-weight: bold;
+    text-shadow: -0 -1px 0 #f7b034, 0 -1px 0 #f7b034, -0 1px 0 #f7b034, 0 1px 0 #f7b034, -1px -0 0 #f7b034, 1px -0 0 #f7b034, -1px 0 0 #f7b034, 1px 0 0 #f7b034, -1px -1px 0 #f7b034, 1px -1px 0 #f7b034, -1px 1px 0 #f7b034, 1px 1px 0 #f7b034, -1px -1px 0 #f7b034, 1px -1px 0 #f7b034, -1px 1px 0 #f7b034, 1px 1px 0 #f7b034;
+    /*text-shadow: -0 -1px 0 #fff, 0 -1px 0 #fff, -0 1px 0 #fff, 0 1px 0 #fff, -1px -0 0 #fff, 1px -0 0 #fff, -1px 0 0 #fff, 1px 0 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;*/
+    text-shadow: -0 -1px 0 #000000, 0 -1px 0 #000000, -0 1px 0 #000000, 0 1px 0 #000000, -1px -0 0 #000000, 1px -0 0 #000000, -1px 0 0 #000000, 1px 0 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000, -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+    /*text-shadow: -0 -2px 0 #000000, 0 -2px 0 #000000, -0 2px 0 #000000, 0 2px 0 #000000, -2px -0 0 #000000, 2px -0 0 #000000, -2px 0 0 #000000, 2px 0 0 #000000, -2px -2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000, 2px 2px 0 #000000, -2px -2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000, 2px 2px 0 #000000;*/
+    display: none;
+    /*line-height: calc(9vh);*/
+}
+
+#loader {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    margin-left: -100px;
+    margin-top: -50px;
+    text-align: center;
+    font-size: 18px;
+    color: #f0f0f0;
+    text-shadow: -0 -1px 3px rgba(0, 181, 226, 0.52), 0 -1px 3px rgba(0, 181, 226, 0.52), -0 1px 3px rgba(0, 181, 226, 0.52), 0 1px 3px rgba(0, 181, 226, 0.52), -1px -0 3px rgba(0, 181, 226, 0.52), 1px -0 3px rgba(0, 181, 226, 0.52), -1px 0 3px rgba(0, 181, 226, 0.52), 1px 0 3px rgba(0, 181, 226, 0.52), -1px -1px 3px rgba(0, 181, 226, 0.52), 1px -1px 3px rgba(0, 181, 226, 0.52), -1px 1px 3px rgba(0, 181, 226, 0.52), 1px 1px 3px rgba(0, 181, 226, 0.52), -1px -1px 3px rgba(0, 181, 226, 0.52), 1px -1px 3px rgba(0, 181, 226, 0.52), -1px 1px 3px rgba(0, 181, 226, 0.52), 1px 1px 3px rgba(0, 181, 226, 0.52);
+}
+
+.ball {
+    background-color: rgba(0, 0, 0, 0);
+    border: 5px solid rgba(0, 183, 229, 0.9);
+    opacity: .9;
+    border-top: 5px solid rgba(0, 0, 0, 0);
+    border-left: 5px solid rgba(0, 0, 0, 0);
+    border-radius: 50px;
+    box-shadow: 0 0 35px #2187e7;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    -moz-animation: spin .5s infinite linear;
+    -webkit-animation: spin .5s infinite linear;
+}
+
+.ball1 {
+    background-color: rgba(0, 0, 0, 0);
+    border: 5px solid rgba(0, 183, 229, 0.9);
+    opacity: .9;
+    border-top: 5px solid rgba(0, 0, 0, 0);
+    border-left: 5px solid rgba(0, 0, 0, 0);
+    border-radius: 50px;
+    box-shadow: 0 0 15px #2187e7;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+    position: relative;
+    top: -50px;
+    -moz-animation: spinoff .5s infinite linear;
+    -webkit-animation: spinoff .5s infinite linear;
+}
+
+@-moz-keyframes spin {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinoff {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+
+    100% {
+        -moz-transform: rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinoff {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+#loader_bg {
+    position: absolute;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+}
+
+#fullScreen {
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+    width: 5%;
+    min-width: 40px;
+    text-align: center;
+    display: none;
+}
+
+#fullScreen img {
+    height: 80%;
+    margin-top: 10%;
+}
+
+#player1balls,
+#player2balls,
+#player1escBalls,
+#player2escBalls,
+#ballsplace {
+    position: absolute;
+    left: 1%;
+    top: 6.5%;
+    height: 6%;
+    display: none;
+}
+
+#player2balls div,
+#player1balls div {
+    float: left;
+    border-radius: 10px;
+    margin-top: 2.35%;
+    margin-left: 1.32%;
+    margin-right: 0.7%;
+    background-color: #fff;
+}
+
+#player1balls img,
+#player2balls img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+
+/*#player1balls img,
+#player2balls img {
+    float: left;
+    margin-top: 2.35%;
+    margin-left: 2.95%;
+    margin-right: 0.7%;
+}*/
+
+
+/*#player1escBalls img,
+#player2escBalls img,
+#player1escBalls div,
+#player2escBalls div {
+    float: left;
+    margin-top: 2.35%;
+    margin-left: 2.95%;
+    margin-right: 0.7%;
+}*/
+
+#hitArrow {
+    position: absolute;
+    bottom: 1%;
+    left: 50%;
+    height: 45%;
+    display: none;
+}
+
+#hitArrow2 {
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    width: 70%;
+    display: none;
+}
+
+#hitRound,
+#roundDummy {
+    position: absolute;
+    left: 50%;
+    height: 5%;
+    bottom: 40%;
+    opacity: 0.3;
+    display: none;
+}
+
+#roundDummy {
+    z-index: 10;
+}
+
+.cursorRot {}
+
+.cursorHit {}
+
+.cursorCueHover {}
+
+#hitLine {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: 40%;
+}
+
+#hitLine div {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+}
+
+#hitLine img {
+    width: 100%;
+}
+
+@keyframes rounds {
+    from {
+        background-size: 30%;
+        opacity: 0.8
+    }
+
+    to {
+        background-size: 100%;
+        opacity: 0.05;
+    }
+}
+
+#hitAnim {
+    position: absolute;
+    left: 50%;
+    display: none;
+}
+
+#hitAnim .round {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+    animation-name: rounds;
+    background-image: url('../img/round.png');
+    opacity: 0;
+}
+
+#hitAnim .round:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+#hand {
+    position: absolute;
+    /*left: 49%;
+    bottom: 39%;*/
+    display: none;
+    left: 50%;
+    bottom: 75%;
+    height: 5%;
+}
+
+@media screen and (max-width: 500px) {
+    #hand {
+        height: 10%;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    #hand {
+        height: 7%;
+    }
+}
+
+@media screen and (max-width: 500px) {}
+
+#howToPlay {
+    position: absolute;
+    font-size: 1.7vh;
+    left: 50%;
+    bottom: 1.5%;
+    color: #fff;
+    white-space: nowrap;
+}
+
+#powerBorder,
+#powerWrap {
+    position: absolute;
+    left: 2%;
+    bottom: 50%;
+    max-height: 461px;
+    height: 40%;
+    display: none;
+}
+
+#power {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-image: url('../img/bill_power_full.png');
+    background-repeat: no-repeat;
+    background-position: left bottom;
+}
+
+#reselect {
+    position: absolute;
+    bottom: 1%;
+    right: 3%;
+    color: #fff;
+    font-size: 24px;
+    display: none;
+    text-align: center;
+    width: 25%
+}
+
+#cueball {
+    position: absolute;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+    top: 20%;
+    display: none;
+}
+
+#textmsg {
+    position: absolute;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+    bottom: 5%;
+    /*display: none;*/
+}
+
+#winner {
+    width: 40%;
+    max-width: 200px;
+    margin-top: 10px;
+}
+
+#reselect img {
+    width: 100%;
+    max-width: 120px;
+}
+
+#looser {
+    width: 35%;
+}
+
+#AdText {
+    z-index: 9999;
+    position: absolute;
+    color: #fff;
+    left: 0px;
+    bottom: 5%;
+    width: 100%;
+    font-size: calc(1em + 4vw);
+}
+
+#zoom {
+    position: absolute;
+    bottom: 12%;
+    left: 0;
+    color: #fff;
+    font-size: 24px;
+    display: none;
+    text-align: center;
+    width: 100%;
+    text-align: center;
+}
+
+#zoom img {
+    width: 55%;
+    max-width: 180px;
+}
+
+#trypool8 {
+    position: absolute;
+    width: 180px;
+    height: 90px;
+    bottom: 11%;
+    left: 50%;
+    margin-left: -90px;
+    text-align: center;
+    cursor: pointer;
+    /* color: #fff; */
+    border-radius: 5px;
+    /* background-color: rgba(255, 255, 255, 0.3); */
+    padding: 5px;
+    font-size: 16px;
+    /* text-shadow: -0 -1px 0 #333333, 0 -1px 0 #333333, -0 1px 0 #333333, 0 1px 0 #333333, -1px -0 0 #333333, 1px -0 0 #333333, -1px 0 0 #333333, 1px 0 0 #333333, -1px -1px 0 #333333, 1px -1px 0 #333333, -1px 1px 0 #333333, 1px 1px 0 #333333, -1px -1px 0 #333333, 1px -1px 0 #333333, -1px 1px 0 #333333, 1px 1px 0 #333333; */
+}
+
+
+@media screen and (max-width:880px) {
+    #trypool8 {
+        width: 100px;
+        height: 50px;
+        margin-left: -50px;
+    }
+}
+
+#trypool8 a {
+    color: #fff;
+    text-decoration: none;
+}
+
+#trypool8 img {
+    float: center;
+    width: 100%;
+    transition: filter 0.3s ease;
+}
+
+#trypool8:hover img {
+    filter: brightness(0.7); /* Затемняем картинку при наведении */
+}

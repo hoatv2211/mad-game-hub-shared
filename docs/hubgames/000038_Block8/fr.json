@@ -1,0 +1,8 @@
+{
+	"game":{
+		"over":"Jeu terminé",
+		"you":"Score",
+		"best":"Meilleur score"
+	},
+ 	"error":"Erreur: vous avez activé le blocage des fenêtres pop-up"
+}

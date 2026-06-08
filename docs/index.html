@@ -1,1190 +1,855 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MADStudio - GameHub</title>
-    <meta name="description" content="MADStudio - Unity game samples hub for learning and portfolio building. Retro-futuristic gaming platform showcasing interactive demos.">
-    <link rel="icon" type="image/png" href="../assets/hubmad.png">
-
-    <!-- Google Fonts: Press Start 2P + VT323 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
-
-    <style>
-        /* ===== CSS Variables - Neon Retro-Futuristic Theme ===== */
-        :root {
-            --primary: #7C3AED;
-            --primary-light: #A78BFA;
-            --cta: #F43F5E;
-            --cta-glow: rgba(244, 63, 94, 0.4);
-            --bg-dark: #0F0F23;
-            --bg-card: #1A1A3E;
-            --bg-card-hover: #25255A;
-            --text: #E2E8F0;
-            --text-muted: #94A3B8;
-            --neon-green: #39FF14;
-            --neon-blue: #00D4FF;
-            --neon-pink: #FF2D95;
-            --neon-yellow: #FFFF00;
-            --font-pixel: 'Press Start 2P', cursive;
-            --font-retro: 'VT323', monospace;
-        }
-
-        /* ===== Reset & Base ===== */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        html:not(.no-reduced-motion) {
-            scroll-behavior: smooth;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        body {
-            font-family: var(--font-retro);
-            background-color: var(--bg-dark);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            font-size: 18px;
-        }
-
-        /* ===== CRT Scanline Overlay ===== */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15) 0px,
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 3px
-            );
-            pointer-events: none;
-            z-index: 9999;
-            animation: scanline-scroll 8s linear infinite;
-        }
-
-        @keyframes scanline-scroll {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(6px); }
-        }
-
-        /* ===== Neon Glow Effects ===== */
-        .neon-glow-purple {
-            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary);
-        }
-
-        .neon-glow-pink {
-            text-shadow: 0 0 10px var(--cta), 0 0 20px var(--cta), 0 0 40px var(--cta-glow);
-        }
-
-        .neon-glow-green {
-            text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
-        }
-
-        .neon-glow-blue {
-            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
-        }
-
-        .neon-border {
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 10px var(--primary), inset 0 0 10px rgba(124, 58, 237, 0.2);
-        }
-
-        .neon-border-pink {
-            border: 2px solid var(--cta);
-            box-shadow: 0 0 10px var(--cta), inset 0 0 10px rgba(244, 63, 94, 0.2);
-        }
-
-        /* ===== Glitch Animation ===== */
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-
-        .glitch:hover {
-            animation: glitch 0.3s ease-in-out;
-        }
-
-        /* ===== Floating Particles ===== */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--neon-blue);
-            border-radius: 50%;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        /* ===== Navigation ===== */
-        .navbar {
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            right: 16px;
-            z-index: 1000;
-            background: rgba(15, 15, 35, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 12px;
-            padding: 12px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
-        }
-
-        .nav-brand {
-            font-family: var(--font-pixel);
-            font-size: 14px;
-            color: var(--primary-light);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-family: var(--font-retro);
-            font-size: 20px;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s, text-shadow 0.2s;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--neon-blue);
-        }
-
-        /* ===== Hero Section ===== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 24px 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-badge {
-            font-family: var(--font-pixel);
-            font-size: 12px;
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
-            padding: 6px 16px;
-            border-radius: 20px;
-            margin-bottom: 24px;
-            letter-spacing: 2px;
-        }
-
-        .hero-title {
-            font-family: var(--font-pixel);
-            font-size: 48px;
-            line-height: 1.3;
-            margin-bottom: 16px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-subtitle {
-            font-family: var(--font-retro);
-            font-size: 28px;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-            max-width: 600px;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn-primary {
-            font-family: var(--font-retro);
-            font-size: 22px;
-            background: var(--cta);
-            color: white;
-            padding: 14px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            border: 2px solid var(--cta);
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 0 15px var(--cta-glow);
-        }
-
-        .btn-primary:hover {
-            background: transparent;
-            color: var(--cta);
-            box-shadow: 0 0 25px var(--cta-glow);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            font-family: var(--font-retro);
-            font-size: 22px;
-            background: transparent;
-            color: var(--neon-blue);
-            padding: 14px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            border: 2px solid var(--neon-blue);
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-        }
-
-        .btn-secondary:hover {
-            background: var(--neon-blue);
-            color: var(--bg-dark);
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        /* ===== Section Styles ===== */
-        .section {
-            padding: 80px 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section-tag {
-            font-family: var(--font-pixel);
-            font-size: 12px;
-            color: var(--neon-green);
-            letter-spacing: 3px;
-            margin-bottom: 12px;
-        }
-
-        .section-title {
-            font-family: var(--font-pixel);
-            font-size: 28px;
-            color: var(--text);
-            margin-bottom: 16px;
-        }
-
-        .section-desc {
-            font-family: var(--font-retro);
-            font-size: 22px;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* ===== Game Showcase Carousel ===== */
-        .carousel-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
-            border: 2px solid rgba(124, 58, 237, 0.4);
-            box-shadow: 0 0 30px rgba(124, 58, 237, 0.2);
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.4s ease;
-        }
-
-        .carousel-slide {
-            min-width: 100%;
-            padding: 48px 32px;
-            background: var(--bg-card);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .carousel-slide iframe {
-            width: 100%;
-            height: 400px;
-            border: 2px solid rgba(124, 58, 237, 0.4);
-            border-radius: 8px;
-            background: var(--bg-dark);
-        }
-
-        .carousel-info h3 {
-            font-family: var(--font-pixel);
-            font-size: 20px;
-            color: var(--primary-light);
-            margin-bottom: 12px;
-        }
-
-        .carousel-info p {
-            font-family: var(--font-retro);
-            font-size: 20px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .carousel-links {
-            display: flex;
-            gap: 12px;
-        }
-
-        .carousel-btn {
-            font-family: var(--font-retro);
-            font-size: 18px;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .carousel-btn-play {
-            background: var(--cta);
-            color: white;
-            border: 1px solid var(--cta);
-        }
-
-        .carousel-btn-play:hover {
-            background: transparent;
-            color: var(--cta);
-        }
-
-        .carousel-btn-source {
-            background: transparent;
-            color: var(--neon-blue);
-            border: 1px solid var(--neon-blue);
-        }
-
-        .carousel-btn-source:hover {
-            background: var(--neon-blue);
-            color: var(--bg-dark);
-        }
-
-        /* ===== Game Thumbnail ===== */
-        .game-thumbnail {
-            width: 100%;
-            max-width: 280px;
-            height: 160px;
-            border-radius: 12px;
-            border: 2px solid rgba(124, 58, 237, 0.5);
-            overflow: hidden;
-            margin-bottom: 20px;
-            position: relative;
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3), inset 0 0 20px rgba(0, 0, 0, 0.4);
-            display: block;
-        }
-
-        .game-thumbnail svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .game-thumbnail::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0,0,0,0.08) 0px,
-                rgba(0,0,0,0.08) 1px,
-                transparent 1px,
-                transparent 4px
-            );
-            pointer-events: none;
-        }
-
-        .carousel-nav {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--text-muted);
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .carousel-dot.active {
-            background: var(--primary-light);
-            box-shadow: 0 0 10px var(--primary);
-        }
-
-        .carousel-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(15, 15, 35, 0.8);
-            color: var(--neon-blue);
-            border: 1px solid var(--neon-blue);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.2s;
-            z-index: 10;
-        }
-
-        .carousel-arrow:hover {
-            background: var(--neon-blue);
-            color: var(--bg-dark);
-        }
-
-        .carousel-prev { left: 16px; }
-        .carousel-next { right: 16px; }
-
-        /* ===== Feature Cards Grid ===== */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 12px;
-            padding: 32px 24px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .feature-card:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--primary-light);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
-        }
-
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background: rgba(124, 58, 237, 0.2);
-            border: 1px solid rgba(124, 58, 237, 0.4);
-        }
-
-        .feature-card h3 {
-            font-family: var(--font-pixel);
-            font-size: 14px;
-            color: var(--text);
-            margin-bottom: 8px;
-        }
-
-        .feature-card p {
-            font-family: var(--font-retro);
-            font-size: 18px;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* ===== Stats Section ===== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            text-align: center;
-        }
-
-        .stat-item {
-            padding: 32px 16px;
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid rgba(124, 58, 237, 0.3);
-        }
-
-        .stat-number {
-            font-family: var(--font-pixel);
-            font-size: 36px;
-            color: var(--neon-green);
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            font-family: var(--font-retro);
-            font-size: 20px;
-            color: var(--text-muted);
-        }
-
-        /* ===== CTA Section ===== */
-        .cta-section {
-            text-align: center;
-            padding: 80px 24px;
-            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(124, 58, 237, 0.1) 50%, var(--bg-dark) 100%);
-        }
-
-        .cta-title {
-            font-family: var(--font-pixel);
-            font-size: 32px;
-            color: var(--text);
-            margin-bottom: 16px;
-        }
-
-        .cta-desc {
-            font-family: var(--font-retro);
-            font-size: 24px;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* ===== Footer ===== */
-        .footer {
-            padding: 48px 24px;
-            border-top: 1px solid rgba(124, 58, 237, 0.3);
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            font-family: var(--font-retro);
-            font-size: 20px;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-
-        .footer-links a:hover {
-            color: var(--neon-blue);
-        }
-
-        .footer-copy {
-            font-family: var(--font-retro);
-            font-size: 16px;
-            color: var(--text-muted);
-        }
-
-        /* ===== Responsive ===== */
-        @media (max-width: 1024px) {
-            .carousel-slide {
-                grid-template-columns: 1fr;
-            }
-            .carousel-slide iframe {
-                height: 300px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 28px;
-            }
-            .hero-subtitle {
-                font-size: 22px;
-            }
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .nav-links {
-                display: none;
-            }
-            .section-title {
-                font-size: 22px;
-            }
-        }
-
-        @media (max-width: 375px) {
-            .hero-title {
-                font-size: 22px;
-            }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-cta {
-                flex-direction: column;
-                width: 100%;
-            }
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MADStudio Game Hub</title>
+  <meta name="description" content="MADStudio hub game catalog with 40 playable HTML games and Unity showcase links for GitHub Pages.">
+  <link rel="icon" type="image/png" href="assets/hubmad.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070814;
+      --panel: #11142a;
+      --panel-strong: #181c3a;
+      --line: #3b47a6;
+      --line-soft: rgba(88, 101, 242, 0.34);
+      --text: #f8fafc;
+      --muted: #b7c2e2;
+      --accent: #ff8a1d;
+      --accent-dark: #9a4300;
+      --cyan: #38d9ff;
+      --green: #4dff88;
+      --danger: #ff4d77;
+      --shadow: rgba(56, 217, 255, 0.24);
+      --font-pixel: 'Press Start 2P', system-ui, sans-serif;
+      --font-retro: 'VT323', ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
+        radial-gradient(circle at 18% 12%, rgba(56, 217, 255, 0.2), transparent 32rem),
+        radial-gradient(circle at 86% 10%, rgba(255, 138, 29, 0.16), transparent 30rem),
+        var(--bg);
+      background-size: 44px 44px, 44px 44px, auto, auto, auto;
+      font-family: var(--font-retro);
+      font-size: 22px;
+      line-height: 1.45;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0, rgba(0,0,0,0.18) 1px, transparent 1px, transparent 4px);
+      opacity: 0.7;
+    }
+
+    a { color: inherit; }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -4rem;
+      z-index: 100;
+      padding: 0.7rem 1rem;
+      background: var(--accent);
+      color: #1a0b00;
+      border: 3px solid #ffd0a1;
+      font-family: var(--font-pixel);
+      font-size: 0.7rem;
+      text-decoration: none;
+    }
+
+    .skip-link:focus { top: 1rem; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(7, 8, 20, 0.84);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 18px var(--shadow);
+    }
+
+    .brand span {
+      font-family: var(--font-pixel);
+      font-size: clamp(0.72rem, 2vw, 0.92rem);
+      letter-spacing: 0;
+      color: var(--text);
+      text-shadow: 0 0 12px rgba(56, 217, 255, 0.7);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a,
+    .btn {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 0.9rem;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: rgba(17, 20, 42, 0.86);
+      color: var(--text);
+      font-family: var(--font-pixel);
+      font-size: 0.62rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--cyan);
+      box-shadow: 0 0 18px var(--shadow);
+    }
+
+    .nav-links a:focus-visible,
+    .btn:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .hero {
+      min-height: 66dvh;
+      display: grid;
+      grid-template-columns: minmax(0, 0.98fr) minmax(340px, 0.82fr);
+      gap: clamp(1.25rem, 4vw, 3rem);
+      align-items: center;
+      padding: clamp(2rem, 6vw, 5rem) 0 clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: 1.15rem;
+      align-content: center;
+    }
+
+    .hero-logo-lockup {
+      display: inline-grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 1rem;
+      width: fit-content;
+      max-width: 100%;
+      padding: 0.85rem 1rem;
+      border: 2px solid rgba(56, 217, 255, 0.48);
+      border-radius: 8px;
+      background: rgba(7, 8, 20, 0.72);
+      box-shadow: inset 0 0 22px rgba(56, 217, 255, 0.1), 0 0 24px rgba(56, 217, 255, 0.12);
+    }
+
+    .hero-logo-lockup img {
+      width: clamp(58px, 7vw, 82px);
+      height: clamp(58px, 7vw, 82px);
+      border-radius: 8px;
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 18px var(--shadow);
+    }
+
+    .hero-logo-lockup span {
+      display: block;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .hero-logo-lockup strong {
+      display: block;
+      margin-top: 0.2rem;
+      font-family: var(--font-pixel);
+      font-size: clamp(0.72rem, 1.3vw, 0.95rem);
+      line-height: 1.45;
+      color: var(--text);
+      text-shadow: 0 0 12px rgba(56, 217, 255, 0.68);
+    }
+
+    .eyebrow {
+      margin: 0 0 1rem;
+      color: var(--green);
+      font-family: var(--font-pixel);
+      font-size: 0.65rem;
+      line-height: 1.7;
+      text-shadow: 0 0 10px rgba(77, 255, 136, 0.45);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 0;
+      max-width: 760px;
+      font-family: var(--font-pixel);
+      font-size: clamp(2rem, 4.4vw, 3.8rem);
+      line-height: 1.1;
+      letter-spacing: 0;
+      text-shadow: 0 0 18px rgba(56, 217, 255, 0.65), 0 0 32px rgba(255, 138, 29, 0.24);
+    }
+
+    .hero-signal {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.9rem;
+      width: fit-content;
+      max-width: 100%;
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .hero-count {
+      color: var(--green);
+      font-family: var(--font-pixel);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 0.9;
+      text-shadow: 0 0 18px rgba(77, 255, 136, 0.5);
+    }
+
+    .hero-signal span:last-child {
+      max-width: 300px;
+      color: var(--text);
+      font-family: var(--font-pixel);
+      font-size: clamp(0.72rem, 1.25vw, 1rem);
+      line-height: 1.55;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: clamp(1.18rem, 2vw, 1.52rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .btn-primary {
+      border-color: #ffb15b;
+      background: var(--accent);
+      color: #1a0b00;
+      box-shadow: 0 0 18px rgba(255, 138, 29, 0.36);
+    }
+
+    .btn-primary:hover { background: #ffad4a; }
+
+    .launcher-panel {
+      align-self: stretch;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(24, 28, 58, 0.94), rgba(17, 20, 42, 0.94));
+      box-shadow: 0 0 26px rgba(56, 217, 255, 0.16), inset 0 0 18px rgba(88, 101, 242, 0.14);
+      padding: clamp(1rem, 2.2vw, 1.35rem);
+      min-height: 390px;
+    }
+
+    .launcher-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .launcher-title {
+      margin: 0;
+      font-family: var(--font-pixel);
+      font-size: 0.76rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .launcher-status {
+      color: var(--green);
+      font-family: var(--font-pixel);
+      font-size: 0.62rem;
+      text-shadow: 0 0 12px rgba(77, 255, 136, 0.52);
+      white-space: nowrap;
+    }
+
+    .featured-list {
+      display: grid;
+      align-content: start;
+      gap: 0.75rem;
+      padding: 1.4rem 0 1rem;
+    }
+
+    .featured-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      align-items: center;
+      padding: 0.82rem 0;
+      border-bottom: 1px solid var(--line-soft);
+      text-decoration: none;
+      transition: color 180ms ease, transform 180ms ease;
+    }
+
+    .featured-row:hover {
+      color: var(--cyan);
+      transform: translateX(4px);
+    }
+
+    .featured-row:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .featured-row:last-child { border-bottom: 0; }
+
+    .featured-number {
+      color: var(--cyan);
+      font-family: var(--font-pixel);
+      font-size: 0.58rem;
+    }
+
+    .featured-name {
+      overflow: hidden;
+      color: var(--text);
+      font-size: 1.25rem;
+      line-height: 1.1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .featured-state {
+      color: var(--green);
+      font-family: var(--font-pixel);
+      font-size: 0.52rem;
+    }
+
+    .stats-panel {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line-soft);
+      padding-top: 0.85rem;
+    }
+
+    .stat-row {
+      display: grid;
+      gap: 0.25rem;
+      padding: 0 0.75rem;
+      border-right: 1px solid var(--line-soft);
+    }
+
+    .stat-row:first-child { padding-left: 0; }
+
+    .stat-row:last-child {
+      padding-right: 0;
+      border-right: 0;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.05;
+    }
+
+    .stat-value {
+      color: var(--green);
+      font-family: var(--font-pixel);
+      font-size: clamp(0.52rem, 0.9vw, 0.68rem);
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
+    .section {
+      padding: clamp(2.5rem, 7vw, 5rem) 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .section-head {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 1.4rem;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-family: var(--font-pixel);
+      font-size: clamp(1.35rem, 3vw, 2.25rem);
+      line-height: 1.2;
+      text-shadow: 0 0 12px rgba(56, 217, 255, 0.5);
+    }
+
+    .section-copy {
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 1.25rem;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 180px;
+      gap: 0.8rem;
+      margin: 1.4rem 0 1.2rem;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 52px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: rgba(17, 20, 42, 0.92);
+      color: var(--text);
+      font: inherit;
+      padding: 0.6rem 0.8rem;
+    }
+
+    input::placeholder { color: #8ea0d1; }
+
+    .count-line {
+      color: var(--green);
+      min-height: 1.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .game-card {
+      min-height: 214px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid var(--line-soft);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(56, 217, 255, 0.08), transparent 48%),
+        linear-gradient(180deg, rgba(24, 28, 58, 0.98), rgba(17, 20, 42, 0.98));
+      padding: 1rem;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--cyan);
+      box-shadow: 0 0 22px var(--shadow);
+    }
+
+    .game-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .game-number {
+      color: var(--green);
+      font-family: var(--font-pixel);
+      font-size: 0.62rem;
+    }
+
+    .tag {
+      border: 1px solid rgba(77, 255, 136, 0.45);
+      border-radius: 999px;
+      padding: 0.1rem 0.5rem;
+      color: var(--green);
+      font-size: 0.92rem;
+    }
+
+    .game-title {
+      margin-bottom: 0.5rem;
+      font-family: var(--font-pixel);
+      font-size: 0.88rem;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .game-path {
+      color: var(--muted);
+      font-size: 0.95rem;
+      overflow-wrap: anywhere;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .card-actions .btn {
+      flex: 1;
+      padding-inline: 0.5rem;
+    }
+
+    .showcase-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .empty {
+      display: none;
+      border: 2px dashed var(--line);
+      border-radius: 8px;
+      padding: 1.2rem;
+      color: var(--muted);
+      background: rgba(17, 20, 42, 0.72);
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line-soft);
+    }
+
+    @media (max-width: 820px) {
+      .nav { align-items: flex-start; flex-direction: column; padding: 1rem 0; }
+      .nav-links { justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .launcher-panel { min-height: 360px; }
+      .stats-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem 0; }
+      .stat-row:nth-child(2) { border-right: 0; padding-right: 0; }
+      .stat-row:nth-child(3) { padding-left: 0; }
+      .toolbar { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      body { font-size: 20px; }
+      .shell { width: min(100% - 24px, 1180px); }
+      .nav-links a, .btn { width: 100%; }
+      .nav-links, .hero-actions, .card-actions { width: 100%; }
+      .hero-logo-lockup { grid-template-columns: 1fr; }
+      .hero-signal { align-items: flex-start; flex-direction: column; }
+      .stats-panel { grid-template-columns: 1fr; }
+      .stat-row,
+      .stat-row:nth-child(2),
+      .stat-row:nth-child(3) { padding: 0.65rem 0; border-right: 0; border-bottom: 1px solid var(--line-soft); }
+      .stat-row:last-child { border-bottom: 0; }
+      .featured-row { grid-template-columns: auto minmax(0, 1fr); }
+      .featured-state { display: none; }
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Floating Particles -->
-    <div class="particle" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
-    <div class="particle" style="top: 20%; right: 10%; animation-delay: 1s; background: var(--neon-pink);"></div>
-    <div class="particle" style="bottom: 30%; left: 15%; animation-delay: 2s; background: var(--neon-green);"></div>
-    <div class="particle" style="top: 50%; right: 20%; animation-delay: 0.5s;"></div>
-    <div class="particle" style="bottom: 20%; right: 5%; animation-delay: 1.5s; background: var(--neon-yellow);"></div>
+  <a class="skip-link" href="#games">Skip to games</a>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <a href="https://hoatv2211.github.io/" class="nav-brand glitch neon-glow-purple">
-            <img src="../assets/hubmad.png" alt="MADStudio" style="height: 32px; width: auto;">
-        </a>
-        <ul class="nav-links">
-            <li><a href="#games">Games</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#stats">Stats</a></li>
-            <li><a href="https://github.com/hoatv2211" target="_blank">GitHub</a></li>
-        </ul>
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary navigation">
+      <a class="brand" href="./" aria-label="MADStudio Game Hub home">
+        <img src="assets/hubmad.png" alt="MADStudio logo">
+        <span>MADStudio Game Hub</span>
+      </a>
+      <div class="nav-links">
+        <a href="#games">Hub Games</a>
+        <a href="#showcase">Unity Showcase</a>
+        <a href="PROJECT_FORMAT.md">Project Format</a>
+      </div>
     </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-badge">// RETRO-FUTURISM //</div>
-        <h1 class="hero-title neon-glow-purple glitch">
-            MAD<br>STUDIO
-        </h1>
-        <p class="hero-subtitle neon-glow-blue">
-            Unity Game Samples Hub
-        </p>
-        <div class="hero-cta">
-            <a href="#games" class="btn-primary cursor-pointer">PLAY DEMOS</a>
-            <a href="https://github.com/hoatv2211" target="_blank" class="btn-secondary cursor-pointer">VIEW SOURCE</a>
+  <main>
+    <section class="shell hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <div class="hero-logo-lockup" aria-hidden="true">
+          <img src="assets/hubmad.png" alt="">
+          <div>
+            <span>GITHUB PAGES ARCADE LIBRARY</span>
+            <strong>Arcade Launcher</strong>
+          </div>
         </div>
+        <p class="eyebrow">PLAYABLE HUB BUILD</p>
+        <h1 id="page-title">MADStudio Game Hub</h1>
+        <div class="hero-signal" aria-label="40 playable hub games">
+          <span class="hero-count">40</span>
+          <span>Playable hub games ready for GitHub Pages</span>
+        </div>
+        <p class="lead">Static catalog. Each row opens one HTML game directly from GitHub Pages.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#games">Browse Games</a>
+          <a class="btn" href="data/hub-games.json">View Metadata</a>
+        </div>
+        <div class="stats-panel" aria-label="Hub statistics">
+          <div class="stat-row">
+            <span class="stat-label">Hub games</span>
+            <strong class="stat-value" id="hub-count">40</strong>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pages source</span>
+            <strong class="stat-value">/docs</strong>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Runtime</span>
+            <strong class="stat-value">Static HTML</strong>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Game path</span>
+            <strong class="stat-value">/hubgames</strong>
+          </div>
+        </div>
+      </div>
+      <aside class="launcher-panel" aria-label="Featured hub games">
+        <div class="launcher-header">
+          <p class="launcher-title">FEATURED QUEUE</p>
+          <span class="launcher-status">READY</span>
+        </div>
+        <div class="featured-list" id="featured-list">
+          <div class="featured-row">
+            <span class="featured-number">#001</span>
+            <span class="featured-name">10 Ten!</span>
+            <span class="featured-state">PLAY</span>
+          </div>
+          <div class="featured-row">
+            <span class="featured-number">#002</span>
+            <span class="featured-name">2-3-4 Player Games</span>
+            <span class="featured-state">PLAY</span>
+          </div>
+          <div class="featured-row">
+            <span class="featured-number">#003</span>
+            <span class="featured-name">2024 Plus</span>
+            <span class="featured-state">PLAY</span>
+          </div>
+        </div>
+        <div class="launcher-header">
+          <p class="launcher-title">SYSTEM INFO</p>
+          <span class="launcher-status">LOCAL PORT 13000</span>
+        </div>
+      </aside>
     </section>
 
-    <!-- Game Showcase Carousel -->
-    <section id="games" class="section">
-        <div class="section-header">
-            <div class="section-tag">// FEATURED //</div>
-            <h2 class="section-title neon-glow-purple">GAME SHOWCASE</h2>
-            <p class="section-desc">Interactive Unity demos - play directly in your browser</p>
+    <section class="section" id="games" aria-labelledby="games-title">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">PLAYABLE HUB BUILDS</p>
+          <h2 id="games-title">Game catalog</h2>
+          <p class="section-copy">Each card points to a hub game project that already contains its own `index.html`.</p>
         </div>
 
-        <div class="carousel-container" id="gameCarousel">
-            <button class="carousel-arrow carousel-prev" onclick="prevSlide()" aria-label="Previous game">&#10094;</button>
-            <button class="carousel-arrow carousel-next" onclick="nextSlide()" aria-label="Next game">&#10095;</button>
-
-            <div class="carousel-track" id="carouselTrack">
-                <!-- Slide 1: Ludo -->
-                <div class="carousel-slide">
-                    <iframe src="https://hoatv2211.github.io/Share001_Ludo/" title="Share001 Ludo Live Demo" loading="lazy"></iframe>
-                    <div class="carousel-info">
-                        <!-- Ludo Thumbnail -->
-                        <div class="game-thumbnail">
-                            <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <radialGradient id="ludo-bg" cx="50%" cy="50%" r="70%">
-                                        <stop offset="0%" stop-color="#1e1040"/>
-                                        <stop offset="100%" stop-color="#0a0820"/>
-                                    </radialGradient>
-                                    <filter id="ludo-glow">
-                                        <feGaussianBlur stdDeviation="2" result="blur"/>
-                                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                                    </filter>
-                                </defs>
-                                <!-- Background -->
-                                <rect width="280" height="160" fill="url(#ludo-bg)"/>
-                                <!-- Stars -->
-                                <circle cx="20" cy="15" r="1" fill="#ffffff" opacity="0.6"/>
-                                <circle cx="55" cy="8" r="1.5" fill="#ffffff" opacity="0.5"/>
-                                <circle cx="230" cy="20" r="1" fill="#ffffff" opacity="0.7"/>
-                                <circle cx="260" cy="10" r="1" fill="#ffffff" opacity="0.4"/>
-                                <circle cx="15" cy="130" r="1" fill="#ffffff" opacity="0.5"/>
-                                <circle cx="265" cy="145" r="1.5" fill="#ffffff" opacity="0.6"/>
-                                <!-- Ludo Board (pixel art) -->
-                                <!-- Board outer frame -->
-                                <rect x="75" y="20" width="130" height="120" rx="4" fill="#2a1060" stroke="#7C3AED" stroke-width="2"/>
-                                <!-- Red zone (top-left) -->
-                                <rect x="79" y="24" width="50" height="50" rx="2" fill="#C0392B"/>
-                                <circle cx="95" cy="40" r="7" fill="#ff6b6b" stroke="white" stroke-width="1.5"/>
-                                <circle cx="113" cy="40" r="7" fill="#ff6b6b" stroke="white" stroke-width="1.5"/>
-                                <circle cx="95" cy="57" r="7" fill="#ff6b6b" stroke="white" stroke-width="1.5"/>
-                                <circle cx="113" cy="57" r="7" fill="#ff6b6b" stroke="white" stroke-width="1.5"/>
-                                <!-- Blue zone (top-right) -->
-                                <rect x="151" y="24" width="50" height="50" rx="2" fill="#1A5276"/>
-                                <circle cx="167" cy="40" r="7" fill="#5dade2" stroke="white" stroke-width="1.5"/>
-                                <circle cx="185" cy="40" r="7" fill="#5dade2" stroke="white" stroke-width="1.5"/>
-                                <circle cx="167" cy="57" r="7" fill="#5dade2" stroke="white" stroke-width="1.5"/>
-                                <circle cx="185" cy="57" r="7" fill="#5dade2" stroke="white" stroke-width="1.5"/>
-                                <!-- Green zone (bottom-left) -->
-                                <rect x="79" y="86" width="50" height="50" rx="2" fill="#1E8449"/>
-                                <circle cx="95" cy="102" r="7" fill="#52be80" stroke="white" stroke-width="1.5"/>
-                                <circle cx="113" cy="102" r="7" fill="#52be80" stroke="white" stroke-width="1.5"/>
-                                <circle cx="95" cy="119" r="7" fill="#52be80" stroke="white" stroke-width="1.5"/>
-                                <circle cx="113" cy="119" r="7" fill="#52be80" stroke="white" stroke-width="1.5"/>
-                                <!-- Yellow zone (bottom-right) -->
-                                <rect x="151" y="86" width="50" height="50" rx="2" fill="#784212"/>
-                                <circle cx="167" cy="102" r="7" fill="#f0b429" stroke="white" stroke-width="1.5"/>
-                                <circle cx="185" cy="102" r="7" fill="#f0b429" stroke="white" stroke-width="1.5"/>
-                                <circle cx="167" cy="119" r="7" fill="#f0b429" stroke="white" stroke-width="1.5"/>
-                                <circle cx="185" cy="119" r="7" fill="#f0b429" stroke="white" stroke-width="1.5"/>
-                                <!-- Center star -->
-                                <polygon points="140,70 144,80 155,80 146,87 149,98 140,91 131,98 134,87 125,80 136,80" fill="#A78BFA" opacity="0.9" filter="url(#ludo-glow)"/>
-                                <!-- Dice (right side decoration) -->
-                                <rect x="218" y="55" width="36" height="36" rx="4" fill="#2a1060" stroke="#A78BFA" stroke-width="2" filter="url(#ludo-glow)"/>
-                                <circle cx="226" cy="63" r="3" fill="#A78BFA"/>
-                                <circle cx="236" cy="63" r="3" fill="#A78BFA"/>
-                                <circle cx="246" cy="63" r="3" fill="#A78BFA"/>
-                                <circle cx="226" cy="73" r="3" fill="#A78BFA"/>
-                                <circle cx="246" cy="73" r="3" fill="#A78BFA"/>
-                                <circle cx="226" cy="83" r="3" fill="#A78BFA"/>
-                                <circle cx="236" cy="83" r="3" fill="#A78BFA"/>
-                                <circle cx="246" cy="83" r="3" fill="#A78BFA"/>
-                                <!-- Label -->
-                                <text x="140" y="152" text-anchor="middle" font-family="monospace" font-size="9" fill="#A78BFA" opacity="0.8" letter-spacing="2">LUDO</text>
-                            </svg>
-                        </div>
-                        <h3 class="neon-glow-purple">Share001_Ludo</h3>
-                        <p>Classic Ludo board game reimagined in Unity. Multiplayer-ready with smooth dice rolling animations and interactive game board.</p>
-                        <div class="carousel-links">
-                            <a href="https://hoatv2211.github.io/Share001_Ludo/" target="_blank" class="carousel-btn carousel-btn-play cursor-pointer">PLAY NOW</a>
-                            <a href="https://github.com/hoatv2211/Share001_Ludo" target="_blank" class="carousel-btn carousel-btn-source cursor-pointer">SOURCE</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 2: PixelShooter3D -->
-                <div class="carousel-slide">
-                    <iframe src="https://hoatv2211.github.io/Share002_PixelShooter3D/" title="Share002 PixelShooter3D Live Demo" loading="lazy"></iframe>
-                    <div class="carousel-info">
-                        <!-- PixelShooter3D Thumbnail -->
-                        <div class="game-thumbnail" style="border-color: rgba(255,45,149,0.5); box-shadow: 0 0 20px rgba(255,45,149,0.3), inset 0 0 20px rgba(0,0,0,0.4);">
-                            <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <radialGradient id="ps-bg" cx="50%" cy="40%" r="70%">
-                                        <stop offset="0%" stop-color="#1a1035"/>
-                                        <stop offset="100%" stop-color="#0a0818"/>
-                                    </radialGradient>
-                                    <filter id="ps-glow">
-                                        <feGaussianBlur stdDeviation="2.5" result="blur"/>
-                                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                                    </filter>
-                                    <filter id="ps-glow-sm">
-                                        <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                                    </filter>
-                                </defs>
-                                <!-- Background -->
-                                <rect width="280" height="160" fill="url(#ps-bg)"/>
-                                <!-- Floor -->
-                                <rect x="0" y="128" width="280" height="32" fill="#0d0a22"/>
-                                <rect x="0" y="126" width="280" height="3" fill="#6d28d9" opacity="0.6"/>
-                                <!-- Belt conveyor -->
-                                <rect x="15" y="132" width="175" height="18" rx="3" fill="#1e1060" stroke="#4c1d95" stroke-width="1.5"/>
-                                <line x1="25" y1="132" x2="25" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
-                                <line x1="55" y1="132" x2="55" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
-                                <line x1="85" y1="132" x2="85" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
-                                <line x1="115" y1="132" x2="115" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
-                                <line x1="145" y1="132" x2="145" y2="150" stroke="#6d28d9" stroke-width="1" opacity="0.5"/>
-                                <polyline points="170,138 176,141 170,144" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0.7"/>
-                                <!-- Active Pig (pink, on belt, shooting red) -->
-                                <g transform="translate(58, 125)" filter="url(#ps-glow-sm)">
-                                    <ellipse cx="12" cy="14" rx="10" ry="9" fill="#f9a8d4"/>
-                                    <circle cx="12" cy="6" r="7" fill="#f9a8d4"/>
-                                    <ellipse cx="12" cy="8" rx="4" ry="3" fill="#fbbf24"/>
-                                    <circle cx="10.5" cy="8" r="1" fill="#92400e"/>
-                                    <circle cx="13.5" cy="8" r="1" fill="#92400e"/>
-                                    <circle cx="9" cy="4" r="1.5" fill="#1e1b4b"/>
-                                    <circle cx="15" cy="4" r="1.5" fill="#1e1b4b"/>
-                                    <ellipse cx="6" cy="2" rx="3" ry="2.5" fill="#f9a8d4" transform="rotate(-20,6,2)"/>
-                                    <ellipse cx="18" cy="2" rx="3" ry="2.5" fill="#f9a8d4" transform="rotate(20,18,2)"/>
-                                    <rect x="5" y="11" width="14" height="6" rx="2" fill="#dc2626"/>
-                                    <text x="12" y="17" text-anchor="middle" font-family="monospace" font-size="5" fill="white" font-weight="bold">RED</text>
-                                </g>
-                                <!-- Waiting pigs on deck -->
-                                <g transform="translate(20, 130)" opacity="0.75">
-                                    <circle cx="10" cy="8" r="7" fill="#86efac"/>
-                                    <ellipse cx="10" cy="10" rx="3.5" ry="2.5" fill="#4ade80"/>
-                                    <circle cx="8.5" cy="6.5" r="1.2" fill="#14532d"/>
-                                    <circle cx="11.5" cy="6.5" r="1.2" fill="#14532d"/>
-                                    <rect x="5" y="13" width="10" height="4" rx="1.5" fill="#16a34a"/>
-                                    <text x="10" y="17" text-anchor="middle" font-family="monospace" font-size="4" fill="white" font-weight="bold">GRN</text>
-                                </g>
-                                <g transform="translate(112, 130)" opacity="0.7">
-                                    <circle cx="10" cy="8" r="7" fill="#93c5fd"/>
-                                    <ellipse cx="10" cy="10" rx="3.5" ry="2.5" fill="#60a5fa"/>
-                                    <circle cx="8.5" cy="6.5" r="1.2" fill="#1e3a8a"/>
-                                    <circle cx="11.5" cy="6.5" r="1.2" fill="#1e3a8a"/>
-                                    <rect x="5" y="13" width="10" height="4" rx="1.5" fill="#2563eb"/>
-                                    <text x="10" y="17" text-anchor="middle" font-family="monospace" font-size="4" fill="white" font-weight="bold">BLU</text>
-                                </g>
-                                <!-- Bullet arc (homing toward red block) -->
-                                <path d="M 70 124 Q 110 60 168 38" stroke="#dc2626" stroke-width="2" fill="none" stroke-dasharray="4,3" opacity="0.8" filter="url(#ps-glow-sm)"/>
-                                <circle cx="128" cy="75" r="4" fill="#dc2626" filter="url(#ps-glow)"/>
-                                <circle cx="128" cy="75" r="2" fill="#fca5a5"/>
-                                <!-- Block grid (colorful, image-to-blocks style) -->
-                                <!-- Row 1 -->
-                                <rect x="100" y="10" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
-                                <rect x="120" y="10" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
-                                <rect x="140" y="10" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
-                                <rect x="160" y="10" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
-                                <rect x="180" y="10" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
-                                <rect x="200" y="10" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
-                                <rect x="220" y="10" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
-                                <!-- Row 2 -->
-                                <rect x="100" y="30" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
-                                <rect x="120" y="30" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
-                                <rect x="140" y="30" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
-                                <rect x="160" y="30" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
-                                <rect x="180" y="30" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
-                                <rect x="200" y="30" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
-                                <rect x="220" y="30" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
-                                <!-- Row 3 -->
-                                <rect x="100" y="50" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
-                                <rect x="120" y="50" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
-                                <rect x="140" y="50" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
-                                <!-- Target block being hit -->
-                                <rect x="160" y="50" width="18" height="18" rx="2" fill="#dc2626" stroke="#fca5a5" stroke-width="2" filter="url(#ps-glow)"/>
-                                <text x="169" y="62" text-anchor="middle" font-family="monospace" font-size="11" fill="white" opacity="0.9">✕</text>
-                                <rect x="180" y="50" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
-                                <rect x="200" y="50" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
-                                <rect x="220" y="50" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
-                                <!-- Row 4 -->
-                                <rect x="100" y="70" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
-                                <rect x="120" y="70" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
-                                <rect x="140" y="70" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
-                                <rect x="160" y="70" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
-                                <rect x="180" y="70" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
-                                <rect x="200" y="70" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
-                                <rect x="220" y="70" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
-                                <!-- Row 5 -->
-                                <rect x="100" y="90" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
-                                <rect x="120" y="90" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
-                                <rect x="140" y="90" width="18" height="18" rx="2" fill="#ca8a04" stroke="#92400e" stroke-width="1"/>
-                                <rect x="160" y="90" width="18" height="18" rx="2" fill="#7c3aed" stroke="#4c1d95" stroke-width="1"/>
-                                <rect x="180" y="90" width="18" height="18" rx="2" fill="#16a34a" stroke="#166534" stroke-width="1"/>
-                                <rect x="200" y="90" width="18" height="18" rx="2" fill="#dc2626" stroke="#991b1b" stroke-width="1"/>
-                                <rect x="220" y="90" width="18" height="18" rx="2" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
-                                <!-- Explosion particles -->
-                                <circle cx="155" cy="55" r="3" fill="#fca5a5" opacity="0.9" filter="url(#ps-glow-sm)"/>
-                                <circle cx="184" cy="52" r="2.5" fill="#fed7aa" opacity="0.8" filter="url(#ps-glow-sm)"/>
-                                <circle cx="172" cy="44" r="2" fill="#fef08a" opacity="0.9" filter="url(#ps-glow-sm)"/>
-                                <circle cx="162" cy="45" r="3.5" fill="#FF8C00" opacity="0.6" filter="url(#ps-glow)"/>
-                                <!-- HUD -->
-                                <text x="6" y="12" font-family="monospace" font-size="7" fill="#a78bfa" opacity="0.8">SCORE</text>
-                                <text x="6" y="22" font-family="monospace" font-size="9" fill="#c4b5fd" opacity="0.9" font-weight="bold">04860</text>
-                                <text x="6" y="36" font-family="monospace" font-size="7" fill="#a78bfa" opacity="0.8">AMMO: 5</text>
-                                <!-- Label -->
-                                <text x="140" y="158" text-anchor="middle" font-family="monospace" font-size="8" fill="#FF2D95" opacity="0.8" letter-spacing="1">PIXEL SHOOTER 3D</text>
-                            </svg>
-                        </div>
-                        <h3 class="neon-glow-pink">Share002_PixelShooter3D</h3>
-                        <p>Pig-based color-matching 3D block shooter. Shoot color-coded bullets to destroy matching blocks, with conveyor belt mechanics and level editor.</p>
-                        <div class="carousel-links">
-                            <a href="https://hoatv2211.github.io/Share002_PixelShooter3D/" target="_blank" class="carousel-btn carousel-btn-play cursor-pointer">PLAY NOW</a>
-                            <a href="https://github.com/hoatv2211/Share002_PixelShooter3D" target="_blank" class="carousel-btn carousel-btn-source cursor-pointer">SOURCE</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3: Age Of Battle -->
-                <div class="carousel-slide">
-                    <iframe src="https://hoatv2211.github.io/Share003_AgeOfBattle/" title="Share003 AgeOfBattle Live Demo" loading="lazy"></iframe>
-                    <div class="carousel-info">
-                        <!-- AgeOfBattle Thumbnail -->
-                        <div class="game-thumbnail" style="border-color: rgba(57,255,20,0.5); box-shadow: 0 0 20px rgba(57,255,20,0.3), inset 0 0 20px rgba(0,0,0,0.4);">
-                            <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="aob-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#1a2e1a"/>
-                                        <stop offset="100%" stop-color="#0d1a0d"/>
-                                    </linearGradient>
-                                    <filter id="aob-glow">
-                                        <feGaussianBlur stdDeviation="2" result="blur"/>
-                                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                                    </filter>
-                                    <filter id="aob-sword-glow">
-                                        <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                                    </filter>
-                                </defs>
-                                <!-- Background -->
-                                <rect width="280" height="160" fill="url(#aob-bg)"/>
-                                <!-- Battlefield grid -->
-                                <g opacity="0.3">
-                                    <line x1="0" y1="40" x2="280" y2="40" stroke="#39FF14" stroke-width="1"/>
-                                    <line x1="0" y1="80" x2="280" y2="80" stroke="#39FF14" stroke-width="1"/>
-                                    <line x1="0" y1="120" x2="280" y2="120" stroke="#39FF14" stroke-width="1"/>
-                                    <line x1="70" y1="0" x2="70" y2="160" stroke="#39FF14" stroke-width="1"/>
-                                    <line x1="140" y1="0" x2="140" y2="160" stroke="#39FF14" stroke-width="1"/>
-                                    <line x1="210" y1="0" x2="210" y2="160" stroke="#39FF14" stroke-width="1"/>
-                                </g>
-                                <!-- Friendly units (left side, blue) -->
-                                <!-- Unit 1 -->
-                                <g transform="translate(30, 50)" filter="url(#aob-glow)">
-                                    <rect x="0" y="0" width="16" height="20" rx="2" fill="#2563EB" stroke="#60a5fa" stroke-width="1.5"/>
-                                    <circle cx="8" cy="6" r="4" fill="#60a5fa" stroke="#0ea5e9" stroke-width="1"/>
-                                    <rect x="2" y="12" width="12" height="6" rx="1" fill="#1e40af" stroke="#0ea5e9" stroke-width="1"/>
-                                    <circle cx="6" cy="18" r="1.5" fill="#60a5fa"/>
-                                    <circle cx="10" cy="18" r="1.5" fill="#60a5fa"/>
-                                </g>
-                                <!-- Unit 2 -->
-                                <g transform="translate(30, 90)" filter="url(#aob-glow)">
-                                    <rect x="0" y="0" width="16" height="20" rx="2" fill="#2563EB" stroke="#60a5fa" stroke-width="1.5"/>
-                                    <circle cx="8" cy="6" r="4" fill="#60a5fa" stroke="#0ea5e9" stroke-width="1"/>
-                                    <rect x="2" y="12" width="12" height="6" rx="1" fill="#1e40af" stroke="#0ea5e9" stroke-width="1"/>
-                                    <circle cx="6" cy="18" r="1.5" fill="#60a5fa"/>
-                                    <circle cx="10" cy="18" r="1.5" fill="#60a5fa"/>
-                                </g>
-                                <!-- Enemy units (right side, red) -->
-                                <!-- Enemy 1 -->
-                                <g transform="translate(234, 45)" filter="url(#aob-glow)">
-                                    <rect x="0" y="0" width="16" height="20" rx="2" fill="#DC2626" stroke="#ef4444" stroke-width="1.5"/>
-                                    <circle cx="8" cy="6" r="4" fill="#ef4444" stroke="#fca5a5" stroke-width="1"/>
-                                    <rect x="2" y="12" width="12" height="6" rx="1" fill="#7f1d1d" stroke="#fca5a5" stroke-width="1"/>
-                                    <circle cx="6" cy="18" r="1.5" fill="#ef4444"/>
-                                    <circle cx="10" cy="18" r="1.5" fill="#ef4444"/>
-                                </g>
-                                <!-- Enemy 2 -->
-                                <g transform="translate(234, 95)" filter="url(#aob-glow)">
-                                    <rect x="0" y="0" width="16" height="20" rx="2" fill="#DC2626" stroke="#ef4444" stroke-width="1.5"/>
-                                    <circle cx="8" cy="6" r="4" fill="#ef4444" stroke="#fca5a5" stroke-width="1"/>
-                                    <rect x="2" y="12" width="12" height="6" rx="1" fill="#7f1d1d" stroke="#fca5a5" stroke-width="1"/>
-                                    <circle cx="6" cy="18" r="1.5" fill="#ef4444"/>
-                                    <circle cx="10" cy="18" r="1.5" fill="#ef4444"/>
-                                </g>
-                                <!-- Combat indicators (damage/attacks) -->
-                                <path d="M 50 65 L 220 60" stroke="#EF4444" stroke-width="2" stroke-dasharray="3,2" opacity="0.7" filter="url(#aob-sword-glow)"/>
-                                <circle cx="85" cy="63" r="3" fill="#FFD700" filter="url(#aob-glow)" opacity="0.8"/>
-                                <circle cx="120" cy="62.5" r="2" fill="#FFA500" filter="url(#aob-glow)" opacity="0.7"/>
-                                <!-- Wave counter -->
-                                <rect x="120" y="8" width="40" height="18" rx="3" fill="#1a1a3e" stroke="#39FF14" stroke-width="1.5" opacity="0.9"/>
-                                <text x="140" y="20" text-anchor="middle" font-family="monospace" font-size="9" fill="#39FF14" font-weight="bold" filter="url(#aob-glow)">WAVE 3</text>
-                                <!-- Resources/Status -->
-                                <rect x="10" y="8" width="50" height="18" rx="3" fill="#1a1a3e" stroke="#0ea5e9" stroke-width="1.5" opacity="0.9"/>
-                                <text x="20" y="15" font-family="monospace" font-size="7" fill="#0ea5e9">UNITS: 2</text>
-                                <text x="20" y="23" font-family="monospace" font-size="7" fill="#0ea5e9">HP: 85%</text>
-                                <!-- Swords/weapons accent -->
-                                <g transform="translate(260, 130)" filter="url(#aob-sword-glow)">
-                                    <polygon points="0,15 2,0 4,15" fill="#39FF14" opacity="0.8"/>
-                                </g>
-                                <!-- Label -->
-                                <text x="140" y="152" text-anchor="middle" font-family="monospace" font-size="9" fill="#39FF14" opacity="0.8" letter-spacing="1">AGE OF BATTLE</text>
-                            </svg>
-                        </div>
-                        <h3 class="neon-glow-green">Share003_AgeOfBattle</h3>
-                        <p>Strategic wave-based battle simulator. Deploy units across a grid battlefield, manage positioning, and lead your forces to victory against enemy waves.</p>
-                        <div class="carousel-links">
-                            <a href="https://hoatv2211.github.io/Share003_AgeOfBattle/" target="_blank" class="carousel-btn carousel-btn-play cursor-pointer">PLAY NOW</a>
-                            <a href="https://github.com/hoatv2211/Share003_AgeOfBattle" target="_blank" class="carousel-btn carousel-btn-source cursor-pointer">SOURCE</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="carousel-nav" id="carouselNav">
-                <button class="carousel-dot active" onclick="goToSlide(0)" aria-label="Game 1"></button>
-                <button class="carousel-dot" onclick="goToSlide(1)" aria-label="Game 2"></button>
-                <button class="carousel-dot" onclick="goToSlide(2)" aria-label="Game 3"></button>
-            </div>
+        <div class="toolbar" role="search">
+          <label>
+            <span class="sr-only">Search games</span>
+            <input id="search" type="search" placeholder="Search by title, number, folder..." autocomplete="off">
+          </label>
+          <label>
+            <span class="sr-only">Sort games</span>
+            <select id="sort">
+              <option value="number">Sort by number</option>
+              <option value="title">Sort by title</option>
+            </select>
+          </label>
         </div>
+
+        <p class="count-line" id="result-count" aria-live="polite">Loading games...</p>
+        <div class="empty" id="empty-state">No games match current search.</div>
+        <div class="grid" id="game-grid" aria-live="polite"></div>
+      </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="section">
-        <div class="section-header">
-            <div class="section-tag">// WHAT WE DO //</div>
-            <h2 class="section-title neon-glow-blue">PLATFORM FEATURES</h2>
-            <p class="section-desc">Building, learning, and sharing Unity game development</p>
+    <section class="section" id="showcase" aria-labelledby="showcase-title">
+      <div class="shell">
+        <div class="section-head">
+          <p class="eyebrow">UNITY LEARNING SAMPLES</p>
+          <h2 id="showcase-title">Portfolio showcase</h2>
+          <p class="section-copy">These entries keep the original learning-focused Unity sample metadata and external source/demo links.</p>
         </div>
-
-        <div class="features-grid">
-            <div class="feature-card cursor-pointer">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--neon-green)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </div>
-                <h3>WEBGL DEMOS</h3>
-                <p>Play Unity games directly in browser with WebGL builds</p>
-            </div>
-
-            <div class="feature-card cursor-pointer">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--neon-blue)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                </div>
-                <h3>OPEN SOURCE</h3>
-                <p>Full source code available on GitHub for learning</p>
-            </div>
-
-            <div class="feature-card cursor-pointer">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--neon-pink)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                </div>
-                <h3>UNITY READY</h3>
-                <p>Each sample opens independently in Unity Editor</p>
-            </div>
-
-            <div class="feature-card cursor-pointer">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--neon-green)" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                </div>
-                <h3>DOCUMENTED</h3>
-                <p>Clear README with setup steps and Unity version</p>
-            </div>
-
-            <div class="feature-card cursor-pointer">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--neon-yellow)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                </div>
-                <h3>CLEAN CODE</h3>
-                <p>Readable, teachable C# code over clever abstractions</p>
-            </div>
-
-            <div class="feature-card cursor-pointer">
-                <div class="feature-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--neon-blue)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <h3>FAST PROTOTYPE</h3>
-                <p>Quick iteration and prototype-focused development</p>
-            </div>
-        </div>
+        <div class="showcase-list" id="showcase-list"></div>
+      </div>
     </section>
+  </main>
 
-    <!-- Stats Section -->
-    <section id="stats" class="section">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span class="stat-number neon-glow-green">002</span>
-                <span class="stat-label">Games</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number neon-glow-blue">100%</span>
-                <span class="stat-label">Open Source</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number neon-glow-pink">WebGL</span>
-                <span class="stat-label">Platform</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number neon-glow-green">24/7</span>
-                <span class="stat-label">Available</span>
-            </div>
-        </div>
-    </section>
+  <footer>
+    <div class="shell">MADStudio Game Hub. Static docs, hub game builds, external Unity source links.</div>
+  </footer>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <h2 class="cta-title neon-glow-purple">READY TO EXPLORE?</h2>
-        <p class="cta-desc">Dive into the code, play the demos, and start building your own Unity games today.</p>
-        <div class="hero-cta">
-            <a href="https://github.com/hoatv2211" target="_blank" class="btn-primary cursor-pointer">BROWSE GITHUB</a>
-            <a href="https://hoatv2211.github.io/" class="btn-secondary cursor-pointer">BACK TO PORTFOLIO</a>
-        </div>
-    </section>
+  <script>
+    const grid = document.querySelector('#game-grid');
+    const searchInput = document.querySelector('#search');
+    const sortSelect = document.querySelector('#sort');
+    const countLine = document.querySelector('#result-count');
+    const hubCount = document.querySelector('#hub-count');
+    const emptyState = document.querySelector('#empty-state');
+    const featuredList = document.querySelector('#featured-list');
+    const showcaseList = document.querySelector('#showcase-list');
+    let hubGames = [];
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://hoatv2211.github.io/" class="cursor-pointer">Portfolio</a>
-            <a href="https://github.com/hoatv2211" target="_blank" class="cursor-pointer">GitHub</a>
-            <a href="https://hoatv2211.github.io/Share001_Ludo/" target="_blank" class="cursor-pointer">Ludo Demo</a>
-            <a href="https://hoatv2211.github.io/Share002_PixelShooter3D/" target="_blank" class="cursor-pointer">PixelShooter3D Demo</a>
-        </div>
-        <p class="footer-copy">&copy; 2026 MADStudio. Built with Unity &amp; Neon Dreams.</p>
-    </footer>
+    function normalize(value) {
+      return String(value || '').toLowerCase();
+    }
 
-    <!-- Carousel JavaScript -->
-    <script>
-        let currentSlide = 0;
-        const track = document.getElementById('carouselTrack');
-        const dots = document.querySelectorAll('.carousel-dot');
-        const totalSlides = 3;
+    function formatNumber(number) {
+      return String(number).padStart(3, '0');
+    }
 
-        function updateCarousel() {
-            track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
-            });
-        }
+    function renderHubGames() {
+      const query = normalize(searchInput.value).trim();
+      const sortMode = sortSelect.value;
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateCarousel();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateCarousel();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
-
-        // Auto-advance every 8 seconds
-        setInterval(nextSlide, 8000);
-
-        // Keyboard navigation for carousel
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') prevSlide();
-            if (e.key === 'ArrowRight') nextSlide();
+      const filtered = hubGames
+        .filter((game) => {
+          const haystack = [game.number, game.title, game.folder].map(normalize).join(' ');
+          return haystack.includes(query);
+        })
+        .sort((a, b) => {
+          if (sortMode === 'title') return a.title.localeCompare(b.title);
+          return a.number - b.number;
         });
-    </script>
+
+      grid.innerHTML = filtered.map((game) => `
+        <article class="game-card">
+          <div>
+            <div class="game-meta">
+              <span class="game-number">#${formatNumber(game.number)}</span>
+              <span class="tag">Ready</span>
+            </div>
+            <h3 class="game-title">${game.title}</h3>
+            <p class="game-path">${game.playPath}</p>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="${game.playPath}">Play</a>
+            <a class="btn" href="${game.playPath}" target="_blank" rel="noopener">New Tab</a>
+          </div>
+        </article>
+      `).join('');
+
+      countLine.textContent = `${filtered.length} of ${hubGames.length} games shown`;
+      emptyState.style.display = filtered.length ? 'none' : 'block';
+    }
+
+    function renderFeaturedGames() {
+      featuredList.innerHTML = hubGames.slice(0, 3).map((game) => `
+        <a class="featured-row" href="${game.playPath}">
+          <span class="featured-number">#${formatNumber(game.number)}</span>
+          <span class="featured-name">${game.title}</span>
+          <span class="featured-state">PLAY</span>
+        </a>
+      `).join('');
+    }
+
+    function renderShowcase(showcaseGames) {
+      showcaseList.innerHTML = showcaseGames.map((game) => `
+        <article class="game-card">
+          <div>
+            <div class="game-meta">
+              <span class="game-number">#${formatNumber(game.number)}</span>
+              <span class="tag">${game.difficulty}</span>
+            </div>
+            <h3 class="game-title">${game.title}</h3>
+            <p class="game-path">${game.description}</p>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-primary" href="${game.links.sampleDoc}">Details</a>
+            <a class="btn" href="${game.links.liveDemo}" target="_blank" rel="noopener">Demo</a>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    async function loadData() {
+      try {
+        const [localResponse, showcaseResponse] = await Promise.all([
+          fetch('data/hub-games.json'),
+          fetch('data/games.json')
+        ]);
+
+        if (!localResponse.ok) throw new Error('Unable to load hub game metadata.');
+        const localData = await localResponse.json();
+        hubGames = localData.games || [];
+        hubCount.textContent = hubGames.length;
+        renderFeaturedGames();
+        renderHubGames();
+
+        if (showcaseResponse.ok) {
+          const showcaseData = await showcaseResponse.json();
+          renderShowcase(showcaseData.games || []);
+        }
+      } catch (error) {
+        countLine.textContent = error.message;
+        countLine.style.color = 'var(--danger)';
+      }
+    }
+
+    searchInput.addEventListener('input', renderHubGames);
+    sortSelect.addEventListener('change', renderHubGames);
+    loadData();
+  </script>
 </body>
 </html>

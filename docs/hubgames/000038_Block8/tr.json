@@ -1,0 +1,8 @@
+{
+	"game":{
+		"over":"Oyun bitti",
+		"you":"Sonuç",
+		"best":"En iyi sonuç"
+	},
+ 	"error":"Hata: Açılır pencere engelleyiciyi etkinleştirdiniz"
+}

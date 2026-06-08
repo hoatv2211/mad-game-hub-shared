@@ -1,0 +1,8 @@
+{
+	"front":"Gold01_PositiveZ.png",
+	"back":"Gold01_NegativeZ.png",
+	"left":"Gold01_PositiveX.png",
+	"right":"Gold01_NegativeX.png",
+	"up":"Gold01_PositiveY.png",
+	"down":"Gold01_NegativeY.png"
+}

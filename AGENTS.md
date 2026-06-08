@@ -1,76 +1,149 @@
 # AGENTS.md
 
 ## Purpose
-This repository is a showcase hub for Unity game samples used for learning and portfolio presentation.
+This file is the primary instruction source for coding agents working in this repository.
 
-Primary goals for coding agents:
-- Keep showcase pages educational, readable, and easy to navigate.
-- Preserve beginner-friendly structure over over-engineering.
-- Favor clear metadata and link quality for portfolio usage.
+This repository is a GitHub Pages-ready game hub and portfolio showcase. It hosts a static public site, playable browser game builds, shared web assets, and metadata for Unity learning samples.
+
+Primary goals for agents:
+- Keep the hub easy to run, publish, browse, and maintain.
+- Preserve clear metadata for hub games and Unity showcase samples.
+- Keep the project static and lightweight unless the user explicitly asks otherwise.
+- Update documentation together with structural, metadata, or workflow changes.
 
 ## Project Context
-- Source of truth for project intent: [README.md](README.md)
-- Repository format standard: [docs/PROJECT_FORMAT.md](docs/PROJECT_FORMAT.md)
-- Showcase contribution workflow: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Current repository is minimal and may be expanded into multiple Unity sample modules over time.
+- Main project overview: [README.md](README.md)
+- Vietnamese overview: [README.VN.md](README.VN.md)
+- Showcase format rules: [docs/PROJECT_FORMAT.md](docs/PROJECT_FORMAT.md)
+- Contribution workflow: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Local preview command: [run.bat](run.bat)
 
-## Agent Working Rules
-- Treat this as a showcase-first documentation project.
-- Prioritize accurate external links to source repositories and live demos.
-- Avoid introducing local Unity project requirements in this repository.
-- Keep dependencies lightweight and justify any new package in pull-request notes.
-- Preserve naming consistency and metadata quality across sample entries.
+Recommended local URL:
 
-## Unity-Focused Conventions
-- Describe gameplay behavior in clear, beginner-friendly language.
-- Keep architecture notes concise and useful for learning context.
-- For sample entries, include setup notes and links to external source repositories.
-- Do not assume source code is stored locally in this repository.
+```text
+http://localhost:13000/
+```
 
-## Documentation Guidance
+Recommended GitHub Pages source:
+
+```text
+Branch: main
+Folder: /docs
+```
+
+## Repository Structure
+```text
+mad-game-hub-shared/
+  README.md
+  README.VN.md
+  run.bat
+  AGENTS.md
+  CONTRIBUTING.md
+  docs/
+    index.html
+    PROJECT_FORMAT.md
+    assets/
+      hubmad.png
+    hubgames/
+      <game-folder>/
+        index.html
+    ShareNNN_GameName.html
+    data/
+      games.json
+      hub-games.json
+```
+
+## Static Site Rules
+- Treat `docs/` as the published site root.
+- Keep paths relative to `docs/` so local preview and GitHub Pages use the same links.
+- Keep `docs/index.html` dependency-light: plain HTML, CSS, JavaScript, and JSON.
+- Do not introduce Node, build tools, or package managers unless the user explicitly requests them.
+- Shared assets required by the live site should live under `docs/assets/`.
+
+## Hub Game Rules
+Hub games live in:
+
+```text
+docs/hubgames/
+```
+
+Hub game catalog lives in:
+
+```text
+docs/data/hub-games.json
+```
+
+Each hub game entry should keep:
+- `number`
+- `title`
+- `folder`
+- `playPath` using `hubgames/<folder>/index.html`
+
+When adding or changing hub games:
+- Confirm every game folder has a root `index.html`.
+- Keep folder names and `playPath` values aligned.
+- Do not add `sourceZip` metadata unless the user asks to track source archives again.
+- Validate `docs/data/hub-games.json` after edits.
+
+## Unity Showcase Rules
+Unity showcase metadata lives in:
+
+```text
+docs/data/games.json
+```
+
+Unity sample pages live in:
+
+```text
+docs/ShareNNN_GameName.html
+```
+
+Use naming pattern:
+
+```text
+ShareNNN_GameName
+```
+
+Rules:
+- `NNN` is zero-padded and incremental.
+- `GameName` uses PascalCase with no spaces.
+- Unity source code is usually external; do not assume Unity projects are stored in this repo.
+- Keep source repository and live demo links accurate.
+- Keep learning outcomes short, readable, and useful for portfolio readers.
+
+## Documentation Rules
+- Update [README.md](README.md) and [README.VN.md](README.VN.md) when project structure, run flow, Pages setup, or public purpose changes.
+- Update [docs/PROJECT_FORMAT.md](docs/PROJECT_FORMAT.md) when metadata or showcase format changes.
+- Update [CONTRIBUTING.md](CONTRIBUTING.md) when contribution or validation workflow changes.
 - Link to existing docs instead of duplicating long explanations.
-- When adding features, update the nearest relevant documentation file in the same change.
-- If no dedicated doc exists yet, start from [README.md](README.md) and keep additions short.
-- Keep sample structure and naming aligned with [docs/PROJECT_FORMAT.md](docs/PROJECT_FORMAT.md).
+- Keep docs beginner-friendly and practical.
 
-## Safe Defaults for AI Edits
+## UI Rules
+- Preserve the hub as an actual usable first screen, not a marketing landing page.
+- Keep game browsing fast: search, filters, cards, and play links should stay easy to scan.
+- Use accessible contrast for text and controls.
+- Use icons or compact labels where they help, but avoid decorative clutter.
+- Do not use emoji as UI icons.
+- Avoid heavy visual dependencies and generated UI frameworks unless requested.
+
+## Safe Defaults For Edits
 - Make minimal, targeted changes.
-- Do not rename files/folders or reorganize project structure unless explicitly requested.
-- Do not add generated binaries or large assets by default.
-- If build/test commands are not documented yet, avoid guessing destructive workflows.
-- Default to documentation and metadata updates for showcase entries.
+- Do not rename folders, reorganize large game builds, or delete assets unless the user explicitly asks.
+- Do not revert unrelated user changes in a dirty worktree.
+- Avoid committing generated binaries, temporary files, caches, or unrelated tool output.
+- Preserve metadata consistency across JSON files, detail pages, and README tables.
 
-## Web/UI Development
+## Validation Checklist
+Before saying a change is complete, run the smallest useful checks for the touched area:
+- Open or serve the site with `run.bat` when UI behavior changed.
+- Confirm `http://localhost:13000/` loads when local preview is relevant.
+- Validate `docs/data/hub-games.json` after hub game metadata changes.
+- Validate `docs/data/games.json` after Unity showcase metadata changes.
+- Confirm changed links and relative paths resolve from the `docs/` site root.
 
-When the user asks to build a **web page, landing page, portfolio page, dashboard, or any UI component** (HTML, Tailwind, React, Next.js…), you **must** use the `ui-ux-pro-max` skill installed at `.claude/skills/ui-ux-pro-max/`.
-
-### Required Workflow
-
-1. **Analyze** requirements (product type, style, industry, stack).
-2. **Generate design system first** (always run before implementing):
-   ```
-   python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<product> <industry> <style>" --design-system -p "Project Name"
-   ```
-3. **Get stack-specific guidelines** (default stack: `html-tailwind`):
-   ```
-   python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --stack html-tailwind
-   ```
-4. **Implement** following the design system and guidelines.
-
-### Trigger Phrases
-Any of the following should activate this workflow:
-- "tạo landing page", "tạo web", "tạo trang", "build page", "create website"
-- "thiết kế UI", "làm dashboard", "portfolio page", "sample index page"
-- Any `.html`, `.tsx`, `.vue`, `.svelte` file creation task
-
-### Rules
-- Never use emojis as icons — use SVG from Heroicons or Lucide.
-- Minimum 4.5:1 color contrast ratio for all text.
-- Always run `--design-system` before writing any UI code.
-- Default to `html-tailwind` stack unless user specifies otherwise.
-- Check Pre-Delivery Checklist in `.claude/skills/ui-ux-pro-max/SKILL.md` before delivering.
-
-## Suggested Next Customizations
-- Add `.github/instructions/showcase.instructions.md` for metadata schema and link validation rules.
-- Add `.github/instructions/contribution.instructions.md` for docs and metadata review checklist.
-- Add `.github/prompts/new-showcase-entry.prompt.md` to scaffold a new sample page consistently.
+## Commit Message Style
+Use concise conventional commits when the user asks for commits:
+- `docs(readme): update hub game instructions`
+- `fix(hub): correct game play paths`
+- `chore(metadata): remove source zip fields`
+- `style(hub): refine launcher hero`

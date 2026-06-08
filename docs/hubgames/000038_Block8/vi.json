@@ -1,0 +1,8 @@
+{
+	"game":{
+		"over":"Trò chơi kết thúc",
+		"you":"Kết quả",
+		"best":"Kết quả tốt nhất"
+	},
+ 	"error":"Lỗi: Bạn đã bật trình chặn cửa sổ bật lên"
+}

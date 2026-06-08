@@ -1,0 +1,8 @@
+{
+	"game":{
+		"over":"Fin del juego",
+		"you":"Ваш счет",
+		"best":"Mejor puntuación"
+	},
+	"error":"Error: tiene habilitado el bloqueo de ventanas emergentes"
+}
