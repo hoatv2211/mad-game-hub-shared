@@ -1,6 +1,5 @@
 # MADStudio Game Hub
 
-![MADStudio Game Hub](docs/assets/hubmad.png)
 
 A GitHub Pages arcade showcase for playable HTML games and Unity learning samples. The hub is built as a static site, so visitors can open the catalog, browse game cards, and jump straight into each browser game without installing anything.
 
