@@ -1,7 +1,5 @@
 # MADStudio Game Hub
 
-![MADStudio Game Hub](docs/assets/hubmad.png)
-
 Một arcade showcase chạy bằng GitHub Pages, dùng để giới thiệu game HTML có thể chơi ngay trên trình duyệt và các sample Unity phục vụ portfolio. Hub là site tĩnh, người xem chỉ cần mở trang, duyệt card game, rồi bấm chơi trực tiếp.
 
 Chơi trực tiếp tại: [https://hoatv2211.github.io/mad-game-hub-shared/](https://hoatv2211.github.io/mad-game-hub-shared/)
