@@ -304,7 +304,7 @@
     .launcher-panel {
       align-self: stretch;
       display: grid;
-      grid-template-rows: auto 1fr auto;
+      grid-template-rows: auto auto 1fr auto;
       border: 2px solid var(--line);
       border-radius: 8px;
       background: linear-gradient(180deg, rgba(24, 28, 58, 0.94), rgba(17, 20, 42, 0.94));
@@ -341,16 +341,16 @@
     .featured-list {
       display: grid;
       align-content: start;
-      gap: 0.75rem;
-      padding: 1.4rem 0 1rem;
+      gap: 0.65rem;
+      padding: 1.15rem 0 0.85rem;
     }
 
     .featured-row {
       display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
+      grid-template-columns: auto 44px minmax(0, 1fr) auto;
       gap: 0.75rem;
       align-items: center;
-      padding: 0.82rem 0;
+      padding: 0.62rem 0;
       border-bottom: 1px solid var(--line-soft);
       text-decoration: none;
       transition: color 180ms ease, transform 180ms ease;
@@ -374,6 +374,23 @@
       font-size: 0.58rem;
     }
 
+    .featured-thumb {
+      width: 44px;
+      height: 44px;
+      overflow: hidden;
+      border: 2px solid rgba(56, 217, 255, 0.52);
+      border-radius: 8px;
+      background: rgba(7, 8, 20, 0.7);
+      box-shadow: 0 0 14px rgba(56, 217, 255, 0.16);
+    }
+
+    .featured-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
     .featured-name {
       overflow: hidden;
       color: var(--text);
@@ -387,6 +404,46 @@
       color: var(--green);
       font-family: var(--font-pixel);
       font-size: 0.52rem;
+    }
+
+    .launcher-art-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.6rem;
+      align-self: start;
+      padding: 0.35rem 0 1rem;
+    }
+
+    .launcher-art-tile {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1;
+      border: 2px solid rgba(88, 101, 242, 0.62);
+      border-radius: 8px;
+      background: rgba(7, 8, 20, 0.82);
+      box-shadow: inset 0 0 18px rgba(56, 217, 255, 0.08), 0 0 18px rgba(56, 217, 255, 0.1);
+    }
+
+    .launcher-art-tile img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 180ms ease, filter 180ms ease;
+    }
+
+    .launcher-art-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 48%, rgba(7, 8, 20, 0.62));
+      pointer-events: none;
+    }
+
+    .launcher-art-tile:hover img,
+    .launcher-art-tile:focus-visible img {
+      filter: saturate(1.18) contrast(1.06);
+      transform: scale(1.05);
     }
 
     .stats-panel {
@@ -482,7 +539,7 @@
     }
 
     .game-card {
-      min-height: 214px;
+      min-height: 430px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -499,6 +556,31 @@
       transform: translateY(-4px);
       border-color: var(--cyan);
       box-shadow: 0 0 22px var(--shadow);
+    }
+
+    .thumb-link {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border: 2px solid rgba(56, 217, 255, 0.42);
+      border-radius: 8px;
+      background: #0b0d1d;
+      box-shadow: inset 0 0 24px rgba(56, 217, 255, 0.12);
+    }
+
+    .game-thumb {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 180ms ease, filter 180ms ease;
+    }
+
+    .game-card:hover .game-thumb {
+      transform: scale(1.04);
+      filter: saturate(1.08) contrast(1.04);
     }
 
     .game-meta {
@@ -580,6 +662,7 @@
       .stat-row:nth-child(2) { border-right: 0; padding-right: 0; }
       .stat-row:nth-child(3) { padding-left: 0; }
       .toolbar { grid-template-columns: 1fr; }
+      .launcher-art-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     }
 
     @media (max-width: 480px) {
@@ -594,8 +677,10 @@
       .stat-row:nth-child(2),
       .stat-row:nth-child(3) { padding: 0.65rem 0; border-right: 0; border-bottom: 1px solid var(--line-soft); }
       .stat-row:last-child { border-bottom: 0; }
-      .featured-row { grid-template-columns: auto minmax(0, 1fr); }
+      .featured-row { grid-template-columns: auto 40px minmax(0, 1fr); }
+      .featured-thumb { width: 40px; height: 40px; }
       .featured-state { display: none; }
+      .launcher-art-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .grid { grid-template-columns: 1fr; }
     }
 
@@ -675,19 +760,28 @@
         <div class="featured-list" id="featured-list">
           <div class="featured-row">
             <span class="featured-number">#001</span>
+            <span class="featured-thumb"><img src="assets/game-icons/000001_10_Ten.png" alt="" loading="lazy"></span>
             <span class="featured-name">10 Ten!</span>
             <span class="featured-state">PLAY</span>
           </div>
           <div class="featured-row">
             <span class="featured-number">#002</span>
+            <span class="featured-thumb"><img src="assets/game-icons/000002_2-3-4_Player_Games.png" alt="" loading="lazy"></span>
             <span class="featured-name">2-3-4 Player Games</span>
             <span class="featured-state">PLAY</span>
           </div>
           <div class="featured-row">
             <span class="featured-number">#003</span>
+            <span class="featured-thumb"><img src="assets/game-icons/000003_2024_Plus.png" alt="" loading="lazy"></span>
             <span class="featured-name">2024 Plus</span>
             <span class="featured-state">PLAY</span>
           </div>
+        </div>
+        <div class="launcher-art-grid" id="launcher-art-grid" aria-label="Featured game artwork">
+          <a class="launcher-art-tile" href="hubgames/000001_10_Ten/index.html"><img src="assets/game-icons/000001_10_Ten.png" alt="10 Ten! icon" loading="lazy"></a>
+          <a class="launcher-art-tile" href="hubgames/000002_2-3-4_Player_Games/index.html"><img src="assets/game-icons/000002_2-3-4_Player_Games.png" alt="2-3-4 Player Games icon" loading="lazy"></a>
+          <a class="launcher-art-tile" href="hubgames/000003_2024_Plus/index.html"><img src="assets/game-icons/000003_2024_Plus.png" alt="2024 Plus icon" loading="lazy"></a>
+          <a class="launcher-art-tile" href="hubgames/000004_2048_Balls/index.html"><img src="assets/game-icons/000004_2048_Balls.png" alt="2048 Balls icon" loading="lazy"></a>
         </div>
         <div class="launcher-header">
           <p class="launcher-title">SYSTEM INFO</p>
@@ -748,6 +842,7 @@
     const hubCount = document.querySelector('#hub-count');
     const emptyState = document.querySelector('#empty-state');
     const featuredList = document.querySelector('#featured-list');
+    const launcherArtGrid = document.querySelector('#launcher-art-grid');
     const showcaseList = document.querySelector('#showcase-list');
     let hubGames = [];
 
@@ -776,6 +871,9 @@
       grid.innerHTML = filtered.map((game) => `
         <article class="game-card">
           <div>
+            <a class="thumb-link" href="${game.playPath}" aria-label="Play ${game.title}">
+              <img class="game-thumb" src="${game.iconPath || 'assets/hubmad.png'}" alt="${game.title} icon" loading="lazy" onerror="this.onerror=null;this.src='assets/hubmad.png';">
+            </a>
             <div class="game-meta">
               <span class="game-number">#${formatNumber(game.number)}</span>
               <span class="tag">Ready</span>
@@ -798,8 +896,15 @@
       featuredList.innerHTML = hubGames.slice(0, 3).map((game) => `
         <a class="featured-row" href="${game.playPath}">
           <span class="featured-number">#${formatNumber(game.number)}</span>
+          <span class="featured-thumb"><img src="${game.iconPath || 'assets/hubmad.png'}" alt="" loading="lazy" onerror="this.onerror=null;this.src='assets/hubmad.png';"></span>
           <span class="featured-name">${game.title}</span>
           <span class="featured-state">PLAY</span>
+        </a>
+      `).join('');
+
+      launcherArtGrid.innerHTML = hubGames.slice(0, 8).map((game) => `
+        <a class="launcher-art-tile" href="${game.playPath}" aria-label="Play ${game.title}">
+          <img src="${game.iconPath || 'assets/hubmad.png'}" alt="${game.title} icon" loading="lazy" onerror="this.onerror=null;this.src='assets/hubmad.png';">
         </a>
       `).join('');
     }
@@ -808,6 +913,9 @@
       showcaseList.innerHTML = showcaseGames.map((game) => `
         <article class="game-card">
           <div>
+            <a class="thumb-link" href="${game.links.sampleDoc}" aria-label="Open ${game.title}">
+              <img class="game-thumb" src="${game.linkIcon || 'assets/hubmad.png'}" alt="${game.title} icon" loading="lazy" onerror="this.onerror=null;this.src='assets/hubmad.png';">
+            </a>
             <div class="game-meta">
               <span class="game-number">#${formatNumber(game.number)}</span>
               <span class="tag">${game.difficulty}</span>

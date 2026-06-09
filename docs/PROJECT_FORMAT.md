@@ -28,6 +28,9 @@ mad-game-hub-shared/
     PROJECT_FORMAT.md
     assets/
       hubmad.png
+      game-icons/
+        000001_10_Ten.png
+        ...
     data/
       hub-games.json
     hubgames/
@@ -86,6 +89,7 @@ Each game in `docs/data/hub-games.json` must include:
 - `title`: human-readable game title.
 - `folder`: exact folder name under `docs/hubgames/`.
 - `playPath`: relative path from `docs/` to the game entry HTML.
+- `iconPath`: relative path from `docs/` to the generated square icon.
 
 Example:
 
@@ -94,16 +98,34 @@ Example:
   "number": 1,
   "title": "10 Ten!",
   "folder": "000001_10_Ten",
-  "playPath": "hubgames/000001_10_Ten/index.html"
+  "playPath": "hubgames/000001_10_Ten/index.html",
+  "iconPath": "assets/game-icons/000001_10_Ten.png"
 }
 ```
 
 Do not add `sourceZip` to metadata. The shared source is the unpacked game folder.
 
+## Game Icons
+
+Hub cards use generated 256x256 PNG icons stored in:
+
+```text
+docs/assets/game-icons/
+```
+
+Refresh icons after adding or changing hub games:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tools/generate-game-icons.ps1
+```
+
+The generator scans each game folder for existing local image assets, crops/resizes the best match, and writes `iconPath` to `docs/data/hub-games.json`. If no readable image exists, it creates a fallback title icon.
+
 ## Hub Page Rules
 
 - Load metadata from `data/hub-games.json`.
 - Build game links from `playPath`.
+- Build game thumbnails from `iconPath`, with `assets/hubmad.png` as fallback.
 - Keep paths relative so the hub works locally and on GitHub Pages.
 - Keep UI text short and scan-friendly.
 - Preserve search/filter behavior when editing the hub.
@@ -129,5 +151,6 @@ A game entry is ready when:
 - `docs/data/hub-games.json` contains complete metadata.
 - `docs/hubgames/<folder>/index.html` exists.
 - `playPath` opens the correct game from the hub.
+- `iconPath` opens the generated 256x256 PNG icon.
 - The game works from `http://localhost:13000/`.
 - Folder names and metadata stay consistent.

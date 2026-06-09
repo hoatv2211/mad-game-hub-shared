@@ -4,241 +4,281 @@
       "number": 1,
       "title": "10 Ten!",
       "folder": "000001_10_Ten",
-      "playPath": "hubgames/000001_10_Ten/index.html"
+      "playPath": "hubgames/000001_10_Ten/index.html",
+      "iconPath": "assets/game-icons/000001_10_Ten.png"
     },
     {
       "number": 2,
       "title": "2-3-4 Player Games",
       "folder": "000002_2-3-4_Player_Games",
-      "playPath": "hubgames/000002_2-3-4_Player_Games/index.html"
+      "playPath": "hubgames/000002_2-3-4_Player_Games/index.html",
+      "iconPath": "assets/game-icons/000002_2-3-4_Player_Games.png"
     },
     {
       "number": 3,
       "title": "2024 Plus",
       "folder": "000003_2024_Plus",
-      "playPath": "hubgames/000003_2024_Plus/index.html"
+      "playPath": "hubgames/000003_2024_Plus/index.html",
+      "iconPath": "assets/game-icons/000003_2024_Plus.png"
     },
     {
       "number": 4,
       "title": "2048 Balls",
       "folder": "000004_2048_Balls",
-      "playPath": "hubgames/000004_2048_Balls/index.html"
+      "playPath": "hubgames/000004_2048_Balls/index.html",
+      "iconPath": "assets/game-icons/000004_2048_Balls.png"
     },
     {
       "number": 5,
       "title": "30s Sausage Survival Master",
       "folder": "000005_30s_Sausage_Survival_Master",
-      "playPath": "hubgames/000005_30s_Sausage_Survival_Master/index.html"
+      "playPath": "hubgames/000005_30s_Sausage_Survival_Master/index.html",
+      "iconPath": "assets/game-icons/000005_30s_Sausage_Survival_Master.png"
     },
     {
       "number": 6,
       "title": "3D Cube 2048",
       "folder": "000006_3D_Cube_2048",
-      "playPath": "hubgames/000006_3D_Cube_2048/index.html"
+      "playPath": "hubgames/000006_3D_Cube_2048/index.html",
+      "iconPath": "assets/game-icons/000006_3D_Cube_2048.png"
     },
     {
       "number": 7,
       "title": "3D Russian Billiards",
       "folder": "000007_3D_Russian_Billiards",
-      "playPath": "hubgames/000007_3D_Russian_Billiards/index.html"
+      "playPath": "hubgames/000007_3D_Russian_Billiards/index.html",
+      "iconPath": "assets/game-icons/000007_3D_Russian_Billiards.png"
     },
     {
       "number": 8,
       "title": "8 Ball Puzzle",
       "folder": "000008_8_Ball_Puzzle",
-      "playPath": "hubgames/000008_8_Ball_Puzzle/index.html"
+      "playPath": "hubgames/000008_8_Ball_Puzzle/index.html",
+      "iconPath": "assets/game-icons/000008_8_Ball_Puzzle.png"
     },
     {
       "number": 9,
       "title": "AmongRun",
       "folder": "000009_AmongRun",
-      "playPath": "hubgames/000009_AmongRun/index.html"
+      "playPath": "hubgames/000009_AmongRun/index.html",
+      "iconPath": "assets/game-icons/000009_AmongRun.png"
     },
     {
       "number": 10,
       "title": "Among Rescue",
       "folder": "000010_Among_Rescue",
-      "playPath": "hubgames/000010_Among_Rescue/index.html"
+      "playPath": "hubgames/000010_Among_Rescue/index.html",
+      "iconPath": "assets/game-icons/000010_Among_Rescue.png"
     },
     {
       "number": 11,
       "title": "Among Rescue 2",
       "folder": "000011_Among_Rescue_2",
-      "playPath": "hubgames/000011_Among_Rescue_2/index.html"
+      "playPath": "hubgames/000011_Among_Rescue_2/index.html",
+      "iconPath": "assets/game-icons/000011_Among_Rescue_2.png"
     },
     {
       "number": 12,
       "title": "Angry Fish",
       "folder": "000012_Angry_Fish",
-      "playPath": "hubgames/000012_Angry_Fish/index.html"
+      "playPath": "hubgames/000012_Angry_Fish/index.html",
+      "iconPath": "assets/game-icons/000012_Angry_Fish.png"
     },
     {
       "number": 13,
       "title": "Aquapark Balls Party",
       "folder": "000013_Aquapark_Balls_Party",
-      "playPath": "hubgames/000013_Aquapark_Balls_Party/index.html"
+      "playPath": "hubgames/000013_Aquapark_Balls_Party/index.html",
+      "iconPath": "assets/game-icons/000013_Aquapark_Balls_Party.png"
     },
     {
       "number": 14,
       "title": "ArcheryMasterPro",
       "folder": "000014_ArcheryMasterPro",
-      "playPath": "hubgames/000014_ArcheryMasterPro/index.html"
+      "playPath": "hubgames/000014_ArcheryMasterPro/index.html",
+      "iconPath": "assets/game-icons/000014_ArcheryMasterPro.png"
     },
     {
       "number": 15,
       "title": "Arena Of Janissary",
       "folder": "000015_Arena_Of_Janissary",
-      "playPath": "hubgames/000015_Arena_Of_Janissary/index.html"
+      "playPath": "hubgames/000015_Arena_Of_Janissary/index.html",
+      "iconPath": "assets/game-icons/000015_Arena_Of_Janissary.png"
     },
     {
       "number": 16,
       "title": "Arrow Of Janissary",
       "folder": "000016_Arrow_Of_Janissary",
-      "playPath": "hubgames/000016_Arrow_Of_Janissary/index.html"
+      "playPath": "hubgames/000016_Arrow_Of_Janissary/index.html",
+      "iconPath": "assets/game-icons/000016_Arrow_Of_Janissary.png"
     },
     {
       "number": 17,
       "title": "Atomic Racer",
       "folder": "000017_Atomic_Racer",
-      "playPath": "hubgames/000017_Atomic_Racer/index.html"
+      "playPath": "hubgames/000017_Atomic_Racer/index.html",
+      "iconPath": "assets/game-icons/000017_Atomic_Racer.png"
     },
     {
       "number": 18,
       "title": "ATV Ultimate Offroad",
       "folder": "000018_ATV_Ultimate_Offroad",
-      "playPath": "hubgames/000018_ATV_Ultimate_Offroad/index.html"
+      "playPath": "hubgames/000018_ATV_Ultimate_Offroad/index.html",
+      "iconPath": "assets/game-icons/000018_ATV_Ultimate_Offroad.png"
     },
     {
       "number": 19,
       "title": "Axe Of Janissary",
       "folder": "000019_Axe_Of_Janissary",
-      "playPath": "hubgames/000019_Axe_Of_Janissary/index.html"
+      "playPath": "hubgames/000019_Axe_Of_Janissary/index.html",
+      "iconPath": "assets/game-icons/000019_Axe_Of_Janissary.png"
     },
     {
       "number": 20,
       "title": "Axe Throw",
       "folder": "000020_Axe_Throw",
-      "playPath": "hubgames/000020_Axe_Throw/index.html"
+      "playPath": "hubgames/000020_Axe_Throw/index.html",
+      "iconPath": "assets/game-icons/000020_Axe_Throw.png"
     },
     {
       "number": 21,
       "title": "Aztec Adventure",
       "folder": "000021_Aztec_Adventure",
-      "playPath": "hubgames/000021_Aztec_Adventure/index.html"
+      "playPath": "hubgames/000021_Aztec_Adventure/index.html",
+      "iconPath": "assets/game-icons/000021_Aztec_Adventure.png"
     },
     {
       "number": 22,
       "title": "Balanced Running",
       "folder": "000022_Balanced_Running",
-      "playPath": "hubgames/000022_Balanced_Running/index.html"
+      "playPath": "hubgames/000022_Balanced_Running/index.html",
+      "iconPath": "assets/game-icons/000022_Balanced_Running.png"
     },
     {
       "number": 23,
       "title": "Baldi",
       "folder": "000023_Baldi",
-      "playPath": "hubgames/000023_Baldi/index.html"
+      "playPath": "hubgames/000023_Baldi/index.html",
+      "iconPath": "assets/game-icons/000023_Baldi.png"
     },
     {
       "number": 24,
       "title": "Balloon Match",
       "folder": "000024_Balloon_Match",
-      "playPath": "hubgames/000024_Balloon_Match/index.html"
+      "playPath": "hubgames/000024_Balloon_Match/index.html",
+      "iconPath": "assets/game-icons/000024_Balloon_Match.png"
     },
     {
       "number": 25,
       "title": "Balloon Maze",
       "folder": "000025_Balloon_Maze",
-      "playPath": "hubgames/000025_Balloon_Maze/index.html"
+      "playPath": "hubgames/000025_Balloon_Maze/index.html",
+      "iconPath": "assets/game-icons/000025_Balloon_Maze.png"
     },
     {
       "number": 26,
       "title": "Balloon Maze 2",
       "folder": "000026_Balloon_Maze_2",
-      "playPath": "hubgames/000026_Balloon_Maze_2/index.html"
+      "playPath": "hubgames/000026_Balloon_Maze_2/index.html",
+      "iconPath": "assets/game-icons/000026_Balloon_Maze_2.png"
     },
     {
       "number": 27,
       "title": "Ball Fall",
       "folder": "000027_Ball_Fall",
-      "playPath": "hubgames/000027_Ball_Fall/index.html"
+      "playPath": "hubgames/000027_Ball_Fall/index.html",
+      "iconPath": "assets/game-icons/000027_Ball_Fall.png"
     },
     {
       "number": 28,
       "title": "Ball Sort",
       "folder": "000028_Ball_Sort",
-      "playPath": "hubgames/000028_Ball_Sort/index.html"
+      "playPath": "hubgames/000028_Ball_Sort/index.html",
+      "iconPath": "assets/game-icons/000028_Ball_Sort.png"
     },
     {
       "number": 29,
       "title": "Basket Random",
       "folder": "000029_Basket_Random",
-      "playPath": "hubgames/000029_Basket_Random/index.html"
+      "playPath": "hubgames/000029_Basket_Random/index.html",
+      "iconPath": "assets/game-icons/000029_Basket_Random.png"
     },
     {
       "number": 30,
       "title": "BattalionCommander",
       "folder": "000030_BattalionCommander",
-      "playPath": "hubgames/000030_BattalionCommander/index.html"
+      "playPath": "hubgames/000030_BattalionCommander/index.html",
+      "iconPath": "assets/game-icons/000030_BattalionCommander.png"
     },
     {
       "number": 31,
       "title": "Bees Love Synthesis2",
       "folder": "000031_Bees_Love_Synthesis2",
-      "playPath": "hubgames/000031_Bees_Love_Synthesis2/index.html"
+      "playPath": "hubgames/000031_Bees_Love_Synthesis2/index.html",
+      "iconPath": "assets/game-icons/000031_Bees_Love_Synthesis2.png"
     },
     {
       "number": 32,
       "title": "Billiards Game In 3D",
       "folder": "000032_Billiards_game_in_3d",
-      "playPath": "hubgames/000032_Billiards_game_in_3d/index.html"
+      "playPath": "hubgames/000032_Billiards_game_in_3d/index.html",
+      "iconPath": "assets/game-icons/000032_Billiards_game_in_3d.png"
     },
     {
       "number": 33,
       "title": "Blast Mania",
       "folder": "000033_Blast_Mania",
-      "playPath": "hubgames/000033_Blast_Mania/index.html"
+      "playPath": "hubgames/000033_Blast_Mania/index.html",
+      "iconPath": "assets/game-icons/000033_Blast_Mania.png"
     },
     {
       "number": 34,
       "title": "Blend Fruits",
       "folder": "000034_Blend_Fruits",
-      "playPath": "hubgames/000034_Blend_Fruits/index.html"
+      "playPath": "hubgames/000034_Blend_Fruits/index.html",
+      "iconPath": "assets/game-icons/000034_Blend_Fruits.png"
     },
     {
       "number": 35,
       "title": "Block Blast 2048",
       "folder": "000035_Block_Blast_2048",
-      "playPath": "hubgames/000035_Block_Blast_2048/index.html"
+      "playPath": "hubgames/000035_Block_Blast_2048/index.html",
+      "iconPath": "assets/game-icons/000035_Block_Blast_2048.png"
     },
     {
       "number": 36,
       "title": "Block Dropping Merge",
       "folder": "000036_Block_Dropping_Merge",
-      "playPath": "hubgames/000036_Block_Dropping_Merge/index.html"
+      "playPath": "hubgames/000036_Block_Dropping_Merge/index.html",
+      "iconPath": "assets/game-icons/000036_Block_Dropping_Merge.png"
     },
     {
       "number": 37,
       "title": "Block Puzzle Gem",
       "folder": "000037_Block_Puzzle_Gem",
-      "playPath": "hubgames/000037_Block_Puzzle_Gem/index.html"
+      "playPath": "hubgames/000037_Block_Puzzle_Gem/index.html",
+      "iconPath": "assets/game-icons/000037_Block_Puzzle_Gem.png"
     },
     {
       "number": 38,
       "title": "Block8",
       "folder": "000038_Block8",
-      "playPath": "hubgames/000038_Block8/index.html"
+      "playPath": "hubgames/000038_Block8/index.html",
+      "iconPath": "assets/game-icons/000038_Block8.png"
     },
     {
       "number": 39,
       "title": "Blocks 100 Carat",
       "folder": "000039_Blocks_100_Carat",
-      "playPath": "hubgames/000039_Blocks_100_Carat/index.html"
+      "playPath": "hubgames/000039_Blocks_100_Carat/index.html",
+      "iconPath": "assets/game-icons/000039_Blocks_100_Carat.png"
     },
     {
       "number": 40,
       "title": "BlockUp Puzzle",
       "folder": "000040_BlockUp_Puzzle",
-      "playPath": "hubgames/000040_BlockUp_Puzzle/index.html"
+      "playPath": "hubgames/000040_BlockUp_Puzzle/index.html",
+      "iconPath": "assets/game-icons/000040_BlockUp_Puzzle.png"
     }
   ]
 }

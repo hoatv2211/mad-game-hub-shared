@@ -18,7 +18,8 @@
         "sampleDoc": "Share001_Ludo.html",
         "liveDemo": "https://hoatv2211.github.io/Share001_Ludo/",
         "sourceRepo": "https://github.com/hoatv2211/Share001_Ludo"
-      }
+      },
+      "linkIcon": "assets/game-icons/Share001_Ludo.png"
     },
     {
       "id": "share002-pixelshooter3d",
@@ -38,7 +39,8 @@
         "sampleDoc": "Share002_PixelShooter3D.html",
         "liveDemo": "https://hoatv2211.github.io/Share002_PixelShooter3D/",
         "sourceRepo": "https://github.com/hoatv2211/Share002_PixelShooter3D"
-      }
+      },
+      "linkIcon": "assets/game-icons/Share002_PixelShooter3D.png"
     },
     {
       "id": "share003-ageofbattle",
@@ -58,7 +60,8 @@
         "sampleDoc": "Share003_AgeOfBattle.html",
         "liveDemo": "https://hoatv2211.github.io/Share003_AgeOfBattle/",
         "sourceRepo": "https://github.com/hoatv2211/Share003_AgeOfBattle"
-      }
+      },
+      "linkIcon": "assets/game-icons/Share003_AgeOfBattle.png"
     }
   ]
 }

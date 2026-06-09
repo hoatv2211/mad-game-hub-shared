@@ -44,6 +44,8 @@ mad-game-hub-shared/
     PROJECT_FORMAT.md
     assets/
       hubmad.png
+      game-icons/
+        <game-folder>.png
     hubgames/
       <game-folder>/
         index.html
@@ -78,10 +80,12 @@ Each hub game entry should keep:
 - `title`
 - `folder`
 - `playPath` using `hubgames/<folder>/index.html`
+- `iconPath` using `assets/game-icons/<folder>.png`
 
 When adding or changing hub games:
 - Confirm every game folder has a root `index.html`.
 - Keep folder names and `playPath` values aligned.
+- Run `powershell -ExecutionPolicy Bypass -File tools/generate-game-icons.ps1` after adding or changing hub games.
 - Do not add `sourceZip` metadata unless the user asks to track source archives again.
 - Validate `docs/data/hub-games.json` after edits.
 
@@ -138,6 +142,7 @@ Before saying a change is complete, run the smallest useful checks for the touch
 - Open or serve the site with `run.bat` when UI behavior changed.
 - Confirm `http://localhost:13000/` loads when local preview is relevant.
 - Validate `docs/data/hub-games.json` after hub game metadata changes.
+- Confirm generated hub game icons exist under `docs/assets/game-icons/` after icon or metadata changes.
 - Validate `docs/data/games.json` after Unity showcase metadata changes.
 - Confirm changed links and relative paths resolve from the `docs/` site root.
 
